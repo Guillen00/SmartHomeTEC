@@ -1,13 +1,13 @@
 using System.Web.Http;
 using WebActivatorEx;
-using Tarea1_API;
 using Swashbuckle.Application;
 using Swashbuckle.Swagger;
 using System.Web.Http.Description;
 using System.Collections.Generic;
+using Proyecto1;
 
 [assembly: PreApplicationStartMethod(typeof(SwaggerConfig), "Register")]
-namespace Tarea1_API
+namespace Proyecto1
 {
     public class SwaggerConfig
     {

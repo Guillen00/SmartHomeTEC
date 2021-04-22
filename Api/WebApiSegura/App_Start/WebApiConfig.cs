@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Web.Http;
 
-namespace Tarea1_API
+namespace Proyecto1
 {
     public static class WebApiConfig
     {
