@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -14,86 +15,63 @@ namespace Proyecto1.Controllers
     /// 
 
     [AllowAnonymous]
-    //[Authorize(Roles = "Administrator")]
-    [RoutePrefix("api/plato")]
+    [RoutePrefix("api/Dashboard")]
     public class DashboardController : ApiController
     {
         
-        //Devuelve todos los platilos
+        //Devuelve cantidad de dispositvos gestionados
         [HttpGet]
-        [Route("menu")]
-        public IHttpActionResult menu()
+        [Route("dispositivosGestionados")]
+        public IHttpActionResult DispositivosGestionados()
         {
-            
+            DataTable tbuser = Proyecto1.DataRequest.BDConection.Consultar_Dispositivo_Activo();
 
-            return Ok("Conectado");
+            return Ok(tbuser.Rows.Count);
         }
-
-        [HttpPost]
-        [Route("agregar")]
-        public IHttpActionResult Agregar()
-        {
-            
-            
-            
-            return Ok("Platillo Agregado");
-        }
-
-        [HttpPost]
-        [Route("eliminar")]
-        public IHttpActionResult Borrar()
-        {
-           
-
-            return Ok("Platillo no se ha encontrado");
-        }
-
-
-        [HttpPost]
-        [Route("editar")]
-        public IHttpActionResult Editar() 
-        {
-           
-            return Ok("Platillo no se ha encontrado");
-        }
-
-        //Muestra una lista con el top de platos mas vendidos
+        //Devuelve cantidad de dispositivos por usuario en promedio
         [HttpGet]
-        [Route("top_vendidos")]
-        public IHttpActionResult top_vendidos()
+        [Route("promedioDXU")]
+        public IHttpActionResult PromedioDispositivoPorUsuario()
         {
-           
+            DataTable tbuser = Proyecto1.DataRequest.BDConection.Consultar_Dispositivo();
+            DataTable tbuser2 = Proyecto1.DataRequest.BDConection.Consultar_Usuario();
+            float uno = tbuser.Rows.Count;
+            float dos = tbuser2.Rows.Count;
+            float Promedio = uno / dos;
 
-            return Ok("Desconectado");
+            return Ok(Promedio);
         }
 
-        //Muestra una lista con el top de platos con mas ganacia
+
+        //Devuelve cantidad de dispositivos por region
         [HttpGet]
-        [Route("top_ganancias")]
-        public IHttpActionResult top_ganancias()
+        [Route("DipositivosXRegion")]
+        public IHttpActionResult DipositivosXRegion()
         {
+            DataTable tbuser = Proyecto1.DataRequest.BDConection.Consultar_Dispositivo_XRegion();
+            int america=0, europa=0, asia=0, oceania=0, africa=0,x=0;
             
-            return Ok();
+            while (x < tbuser.Rows.Count) {
+                if (tbuser.Rows[x]["Continente"].ToString() == "America") { america++; }
+                if (tbuser.Rows[x]["Continente"].ToString() == "Europa") { europa++; }
+                if (tbuser.Rows[x]["Continente"].ToString() == "Asia") { asia++; }
+                if (tbuser.Rows[x]["Continente"].ToString() == "Africa") { africa++; }
+                if (tbuser.Rows[x]["Continente"].ToString() == "Oceania") { oceania++; }
+                x++;
+            }
+        // America, Europa, Asia, Africa, Oceania
+            int[] resultado = { america, europa, asia, africa, oceania };
+            return Ok(resultado);
         }
-
-        //Muestra una lista con el top de platos con mas feedback
+        //Devuelve cantidad de dispositivos agregados y su estado activo
         [HttpGet]
-        [Route("top_feedback")]
-        public IHttpActionResult top_feedback()
+        [Route("Dispositivos")]
+        public IHttpActionResult Dipositivos()
         {
-     
+            DataTable tbuser = Proyecto1.DataRequest.BDConection.Consultar_Dispositivo();
 
-            return Ok("ok");
+            return Ok(tbuser);
         }
-        //Muestra una lista con el top de usuarios con mas ordenes
-        [HttpGet]
-        [Route("top_ordenes")]
-        public IHttpActionResult top_ordenes()
-        {
-            
 
-
-            return Ok("ok");
-        }
     }
 }

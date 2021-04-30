@@ -50,6 +50,10 @@ namespace Proyecto1.Controllers
                 x++;
             }
             Proyecto1.DataRequest.BDConection.Registrar_Usuario(user.Nombre,user.Apellido,user.Correo,user.Contraseña,user.Direccion,user.Continente,user.Pais);
+            Proyecto1.DataRequest.BDConection.Agregar_Aposento(user.Correo, "dormitorio");
+            Proyecto1.DataRequest.BDConection.Agregar_Aposento(user.Correo, "cocina");
+            Proyecto1.DataRequest.BDConection.Agregar_Aposento(user.Correo, "sala");
+            Proyecto1.DataRequest.BDConection.Agregar_Aposento(user.Correo, "comedor");
             return Ok("El usuario se ha agregado exitosamente");
         }
 

@@ -86,10 +86,28 @@ namespace Proyecto1.DataRequest
             datos.Fill(tabla);
             return tabla;
         }
-        public static void Agregar_Dispositivo(int serie, string marca, int consumo, string aposento, string nombre, string descripcion, int  t_garantia, Boolean activo, string  historialDuenos )
+        public static DataTable Consultar_Dispositivo_XRegion()
+        {
+            string query = "SELECT \"NombreD\",\"Continente\" FROM  \"Distribuidores\" inner join \"Dispositivo\" on \"Distribuidor\" = \"NombreD\"; ";
+            NpgsqlCommand conector = new NpgsqlCommand(query, conn);
+            NpgsqlDataAdapter datos = new NpgsqlDataAdapter(conector);
+            DataTable tabla = new DataTable();
+            datos.Fill(tabla);
+            return tabla;
+        }
+        public static DataTable Consultar_Dispositivo_NoActivo()
+        {
+            string query = "select * from \"Dispositivo\" " + "where \"Activo\" = " + false + "";
+            NpgsqlCommand conector = new NpgsqlCommand(query, conn);
+            NpgsqlDataAdapter datos = new NpgsqlDataAdapter(conector);
+            DataTable tabla = new DataTable();
+            datos.Fill(tabla);
+            return tabla;
+        }
+        public static void Agregar_Dispositivo(int serie, string marca, int consumo, string aposento, string nombre, string descripcion, int  t_garantia, Boolean activo, string  historialDuenos ,string distr,string Agregado,string Dueño)
         {
 
-            string query = "Insert into \"Dispositivo\" values(" + serie + ",'" + marca + "'," + consumo + ",'" + aposento + "','" + nombre + "','" + descripcion + "'," + t_garantia + "," + activo + ", ' " + historialDuenos + "')";
+            string query = "Insert into \"Dispositivo\" values(" + serie + ",'" + marca + "'," + consumo + ",'" + aposento + "','" + nombre + "','" + descripcion + "'," + t_garantia + "," + activo + ", ' " + historialDuenos + "','" + distr + "','" + Agregado + "','"+ Dueño + "')";
             conn.Close();
             conn.Open();
             NpgsqlCommand conector = new NpgsqlCommand(query, conn);
@@ -97,9 +115,9 @@ namespace Proyecto1.DataRequest
             return;
         }
 
-        public static void Editar_Dispositivo(int serie, string marca, int consumo, string aposento, string nombre, string descripcion, int t_garantia, Boolean activo, string historialDuenos)
+        public static void Editar_Dispositivo(int serie, string marca, int consumo, string aposento, string nombre, string descripcion, int t_garantia, Boolean activo, string historialDuenos,string distr,string Agregado,string dueño)
         {
-            string query = "Update \"Dispositivo\" set \"# Serie\" =" + serie + ",\"Marca\" = '" + marca + "',\"Consumo Electrico\" = " + consumo + ", \"Aposento\" = '" + aposento + "',\"Nombre\" = '" + nombre + "',\"Descripcion\" = '" + descripcion + "',\"Tiempo de garantia \" = " + t_garantia + ", \"Activo\"= "+activo+ ",\"Historial Dueños\"= '" + historialDuenos+"' "+ "where \"# Serie\" = " + serie + "";
+            string query = "Update \"Dispositivo\" set \"# Serie\" =" + serie + ",\"Marca\" = '" + marca + "',\"Consumo Electrico\" = " + consumo + ", \"Aposento\" = '" + aposento + "',\"Nombre\" = '" + nombre + "',\"Descripcion\" = '" + descripcion + "',\"Tiempo de garantia \" = " + t_garantia + ", \"Activo\"= "+activo+ ",\"Historial Dueños\"= '" + historialDuenos+"',\"Distribuidor\"='"+distr + "',\"AgregadoPor\"='" + Agregado + "',\"Dueño\"='" + dueño + "' " + "where \"# Serie\" = " + serie + "";
             NpgsqlCommand conector = new NpgsqlCommand(query, conn);
             conn.Close();
             conn.Open();
@@ -127,5 +145,158 @@ namespace Proyecto1.DataRequest
             return;
         }
 
+        public static DataTable Consultar_Historial(int serie)
+        {
+            string query = "select * from \"Historial\" " + "where \"# Serie\" = " + serie + "";
+            NpgsqlCommand conector = new NpgsqlCommand(query, conn);
+            NpgsqlDataAdapter datos = new NpgsqlDataAdapter(conector);
+            DataTable tabla = new DataTable();
+            datos.Fill(tabla);
+            return tabla;
+        }
+
+        //------------------------------------------------------------Factura-------------------------------------------------
+        public static void Agregar_Factura(int serie, int factura, DateTime Tcompra,string dispositivo,int precio)
+        {
+            string query = "Insert into \"Factura\" values(" + factura + "," +serie + " , '" + String.Format("{0:d/M/yyyy HH:mm:ss}", Tcompra) + "','" + dispositivo +"'," + precio + ")";
+            NpgsqlCommand conector = new NpgsqlCommand(query, conn);
+            conn.Close();
+            conn.Open();
+            conector.ExecuteNonQuery();
+            return;
+        }
+
+        public static DataTable Consultar_Factura(int serie)
+        {
+            string query = "select * from \"Factura\" " + "where \"# Serie\" = " + serie + "";
+            NpgsqlCommand conector = new NpgsqlCommand(query, conn);
+            NpgsqlDataAdapter datos = new NpgsqlDataAdapter(conector);
+            DataTable tabla = new DataTable();
+            datos.Fill(tabla);
+            return tabla;
+        }
+
+        public static DataTable Consultar_FacturaT()
+        {
+            string query = "select * from \"Factura\" ";
+            NpgsqlCommand conector = new NpgsqlCommand(query, conn);
+            NpgsqlDataAdapter datos = new NpgsqlDataAdapter(conector);
+            DataTable tabla = new DataTable();
+            datos.Fill(tabla);
+            return tabla;
+        }
+
+        //-----------------------------------------------------------Certificado---------------------------------------------
+
+        public static void Agregar_Certificado( DateTime Tcompra, DateTime Tfin, string marca, string nombre,int serie)
+        {
+            string query = "Insert into \"Certificado de Garantia\" values('" + String.Format("{0:d/M/yyyy HH:mm:ss}", Tcompra) + "','" + String.Format("{0:d/M/yyyy HH:mm:ss}", Tfin) + "','" + marca + "','" + nombre + "',"+ serie+  ")";
+            NpgsqlCommand conector = new NpgsqlCommand(query, conn);
+            conn.Close();
+            conn.Open();
+            conector.ExecuteNonQuery();
+            return;
+        }
+
+        public static DataTable Consultar_Certificado(int serie)
+        {
+            string query = "select * from \"Certificado de Garantia\" " + "where \"# Serie\" = " + serie + "";
+            NpgsqlCommand conector = new NpgsqlCommand(query, conn);
+            NpgsqlDataAdapter datos = new NpgsqlDataAdapter(conector);
+            DataTable tabla = new DataTable();
+            datos.Fill(tabla);
+            return tabla;
+        }
+        public static DataTable Consultar_CertificadoT()
+        {
+            string query = "select * from \"Certificado de Garantia\" ";
+            NpgsqlCommand conector = new NpgsqlCommand(query, conn);
+            NpgsqlDataAdapter datos = new NpgsqlDataAdapter(conector);
+            DataTable tabla = new DataTable();
+            datos.Fill(tabla);
+            return tabla;
+        }
+        //---------------------------------------------------Aposento----------------------------------------------------------------
+
+        public static void Agregar_Aposento(string correo,  string aposento)
+        {
+            string query = "Insert into \"Aposento\" values('" + correo + "','" + aposento + "')";
+            NpgsqlCommand conector = new NpgsqlCommand(query, conn);
+            conn.Close();
+            conn.Open();
+            conector.ExecuteNonQuery();
+            return;
+        }
+
+        public static DataTable Consultar_Aposento(string correo)
+        {
+            string query = "select * from \"Aposento\" " + "where \"Correo\" = '" + correo + "'";
+            NpgsqlCommand conector = new NpgsqlCommand(query, conn);
+            NpgsqlDataAdapter datos = new NpgsqlDataAdapter(conector);
+            DataTable tabla = new DataTable();
+            datos.Fill(tabla);
+            return tabla;
+        }
+
+        //---------------------------------------------------------------Pedidos-------------------------------------------------------------------
+
+        public static void Agregar_Pedido(int pedido, DateTime  Fecha, string dispositivo,string marca,int serie, int monto,string usuario)
+        {
+            string query = "Insert into \"Pedidos\" values(" + pedido + " , '" + String.Format("{0:d/M/yyyy HH:mm:ss}", Fecha) + "','"+ dispositivo+"','"+ marca +"',"+serie+","+monto+ ",'" + usuario + "')";
+            NpgsqlCommand conector = new NpgsqlCommand(query, conn);
+            conn.Close();
+            conn.Open();
+            conector.ExecuteNonQuery();
+            return;
+        }
+
+        public static DataTable Consultar_Pedido(int serie)
+        {
+            string query = "select * from \"Pedidos\" " + "where \"# Serie\" = " + serie + "";
+            NpgsqlCommand conector = new NpgsqlCommand(query, conn);
+            NpgsqlDataAdapter datos = new NpgsqlDataAdapter(conector);
+            DataTable tabla = new DataTable();
+            datos.Fill(tabla);
+            return tabla;
+        }
+        public static DataTable Consultar_PedidoU(string usuario)
+        {
+            string query = "select * from \"Pedidos\"  " + "where \"Usuario\" = '" + usuario + "'"+ "  ORDER BY \"# Pedido\" ASC ";
+            NpgsqlCommand conector = new NpgsqlCommand(query, conn);
+            NpgsqlDataAdapter datos = new NpgsqlDataAdapter(conector);
+            DataTable tabla = new DataTable();
+            datos.Fill(tabla);
+            return tabla;
+        }
+        //--------------------------------------------------------Distribuidores------------------------------------------------------------------------
+
+        public static void Agregar_Distribuidor(int Cjuridica, string Nombre, string Continente, string pais)
+        {
+            string query = "Insert into \"Distribuidores\" values(" + Cjuridica + " , '"  + Nombre + "','" + Continente + "','" + pais + "')";
+            NpgsqlCommand conector = new NpgsqlCommand(query, conn);
+            conn.Close();
+            conn.Open();
+            conector.ExecuteNonQuery();
+            return;
+        }
+
+        public static DataTable Consultar_Distribuidor(int Cjuridica)
+        {
+            string query = "select * from \"Distribuidores\" " + "where \"Cedula Juridica\" = " + Cjuridica + "";
+            NpgsqlCommand conector = new NpgsqlCommand(query, conn);
+            NpgsqlDataAdapter datos = new NpgsqlDataAdapter(conector);
+            DataTable tabla = new DataTable();
+            datos.Fill(tabla);
+            return tabla;
+        }
+        public static DataTable Consultar_DistribuidorN(string name)
+        {
+            string query = "select * from \"Distribuidores\" " + "where \"NombreD\" = '" + name + "'";
+            NpgsqlCommand conector = new NpgsqlCommand(query, conn);
+            NpgsqlDataAdapter datos = new NpgsqlDataAdapter(conector);
+            DataTable tabla = new DataTable();
+            datos.Fill(tabla);
+            return tabla;
+        }
     }
 }

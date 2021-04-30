@@ -16,6 +16,9 @@ namespace Proyecto1.DataRequest
         public int Tiempo_Garantia { get; set; }
         public Boolean Activo { get; set; }
         public string Historial_Dueños { get; set; }
+        public string Distribuidor { get; set; }
+        public string AgregadoPor { get; set; }
+        public string Dueño { get; set; }
     }
 
     public class Historial
@@ -51,9 +54,10 @@ namespace Proyecto1.DataRequest
     {
         public int Num_Factura { get; set; }
         public DateTime Fecha_Compra { get; set; }
-        public Dispositivo dispositivo { get; set; }
+        public string dispositivo { get; set; }
         public int Precio { get; set; }
-        
+        public int serie { get; set; }
+
     }
 
     public class Certificado_Garantia
@@ -61,7 +65,7 @@ namespace Proyecto1.DataRequest
         public DateTime Fecha_Compra { get; set; }
         public DateTime Fecha_Fin_Garantia { get; set; }
         public string Marca { get; set; }
-        public Dispositivo dispositivo { get; set; }
+        public string dispositivo { get; set; }
         public int Serie { get; set; }
 
     }
@@ -69,13 +73,12 @@ namespace Proyecto1.DataRequest
     public class Pedidos
     {
         public int Num_Pedido { get; set; }
-        public string Correo { get; set; }
         public DateTime Fecha_Hora { get; set; }
-        public Dispositivo dispositivo { get; set; }
+        public string dispositivo { get; set; }
         public string Marca { get; set; }
         public int Serie { get; set; }
         public int Monto_Total { get; set; }
-
+        public string Usuario { get; set; }
     }
 
     public class Aposentos
