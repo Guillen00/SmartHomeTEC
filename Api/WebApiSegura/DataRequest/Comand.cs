@@ -298,5 +298,16 @@ namespace Proyecto1.DataRequest
             datos.Fill(tabla);
             return tabla;
         }
+
+        //----------------------------------------------------------------Reportes---------------------------------------------------
+        public static DataTable Reporte_Consumo(string correo,DateTime primer, DateTime segundo)
+        {
+            string query = "SELECT * FROM \"Dispositivo\" inner join \"Historial\" on \"Historial\".\"# Serie\" = \"Dispositivo\".\"# Serie\" where \"Dueño\" = '"+ correo +"' AND \"Fecha\"  BETWEEN '" + String.Format("{0:d/M/yyyy HH:mm:ss}", primer) + "' AND '"+ String.Format("{0:d/M/yyyy HH:mm:ss}", segundo) + "'  Order by \"Fecha\" ASC; ";
+            NpgsqlCommand conector = new NpgsqlCommand(query, conn);
+            NpgsqlDataAdapter datos = new NpgsqlDataAdapter(conector);
+            DataTable tabla = new DataTable();
+            datos.Fill(tabla);
+            return tabla;
+        }
     }
 }

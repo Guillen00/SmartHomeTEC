@@ -87,4 +87,11 @@ namespace Proyecto1.DataRequest
         public string Nombre { get; set; }
 
     }
+
+    public class Reporte
+    {
+        public string Correo { get; set; }
+        public DateTime mes { get; set; }
+
+    }
 }
