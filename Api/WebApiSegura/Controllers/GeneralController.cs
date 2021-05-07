@@ -26,7 +26,7 @@ namespace Proyecto1.Controllers
             int x = 0;
             while (x < tbuser.Rows.Count)
             {
-                if (disp.Serie == (int)tbuser.Rows[x]["# Serie"])
+                if (disp.Serie == (int)tbuser.Rows[x]["#_Serie"])
                 {
                     return Ok("El numero de serie del dispositivo ya ha sido ingresado");
                 }
@@ -50,21 +50,21 @@ namespace Proyecto1.Controllers
             int x = 0;
             while (x < tbuser.Rows.Count)
             {
-                if (disp.Serie == (int) tbuser.Rows[x]["# Serie"])
+                if (disp.Serie == (int) tbuser.Rows[x]["#_Serie"])
                 {
                     DataTable tbuser2 = Proyecto1.DataRequest.BDConection.Consultar_DispositivoSerie(disp.Serie);
                     if (disp.Nombre == null) { disp.Nombre = tbuser2.Rows[0]["Nombre"].ToString(); }
                     if (disp.Activo == null) { disp.Activo = Convert.ToBoolean(tbuser2.Rows[0]["Activo"]); }
                     if (disp.AgregadoPor == null) { disp.AgregadoPor = tbuser2.Rows[0]["AgregadoPor"].ToString(); }
                     if (disp.Aposento == null) { disp.Aposento = tbuser2.Rows[0]["Aposento"].ToString(); }
-                    if (disp.Historial_Dueños == null) { disp.Historial_Dueños = tbuser2.Rows[0]["Historial Dueños"].ToString(); }
-                    disp.Serie = (int)tbuser2.Rows[0]["# Serie"];
-                    if (disp.Consumo_Electrico == null) { disp.Consumo_Electrico = (int)tbuser2.Rows[0]["Consumo Electrico"]; }
+                    if (disp.Historial_Dueños == null) { disp.Historial_Dueños = tbuser2.Rows[0]["Historial_Dueños"].ToString(); }
+                    disp.Serie = (int)tbuser2.Rows[0]["#_Serie"];
+                    if (disp.Consumo_Electrico == null) { disp.Consumo_Electrico = (int)tbuser2.Rows[0]["Consumo_Electrico"]; }
                     if (disp.Decripcion == null) { disp.Decripcion = tbuser2.Rows[0]["Descripcion"].ToString(); }
                     if (disp.Distribuidor == null) { disp.Distribuidor = tbuser2.Rows[0]["Distribuidor"].ToString(); }
                     if (disp.Dueño == null) { disp.Dueño = tbuser2.Rows[0]["Dueño"].ToString(); }
                     if (disp.Marca == null) { disp.Marca = tbuser2.Rows[0]["Marca"].ToString(); }
-                    if (disp.Tiempo_Garantia == null) { disp.Tiempo_Garantia = (int)tbuser2.Rows[0]["Tiempo de garantia "]; }
+                    if (disp.Tiempo_Garantia == null) { disp.Tiempo_Garantia = (int)tbuser2.Rows[0]["Tiempo_de_garantia "]; }
 
 
                     Proyecto1.DataRequest.BDConection.Editar_Dispositivo(disp.Serie, disp.Marca, disp.Consumo_Electrico, disp.Aposento, disp.Nombre, disp.Decripcion, disp.Tiempo_Garantia, disp.Activo, disp.Historial_Dueños,disp.Distribuidor,disp.AgregadoPor,disp.Dueño);
@@ -85,21 +85,21 @@ namespace Proyecto1.Controllers
             int x = 0;
             while (x < tbuser.Rows.Count)
             {
-                if (disp.Serie == (int)tbuser.Rows[x]["# Serie"])
+                if (disp.Serie == (int)tbuser.Rows[x]["#_Serie"])
                 {
                     DataTable tbuser2 = Proyecto1.DataRequest.BDConection.Consultar_DispositivoSerie(disp.Serie);
                     if (disp.Nombre == null) { disp.Nombre = tbuser2.Rows[0]["Nombre"].ToString(); }
                     if (disp.Activo == null) { disp.Activo = Convert.ToBoolean(tbuser2.Rows[0]["Activo"]); }
                     if (disp.AgregadoPor == null) { disp.AgregadoPor = tbuser2.Rows[0]["AgregadoPor"].ToString(); }
                     if (disp.Aposento == null) { disp.Aposento = tbuser2.Rows[0]["Aposento"].ToString(); }
-                    if (disp.Historial_Dueños == null) { disp.Historial_Dueños = tbuser2.Rows[0]["Historial Dueños"].ToString(); }
-                    disp.Serie = (int)tbuser2.Rows[0]["# Serie"];
-                    if (disp.Consumo_Electrico == null) { disp.Consumo_Electrico = (int)tbuser2.Rows[0]["Consumo Electrico"]; }
+                    if (disp.Historial_Dueños == null) { disp.Historial_Dueños = tbuser2.Rows[0]["Historial_Dueños"].ToString(); }
+                    disp.Serie = (int)tbuser2.Rows[0]["#_Serie"];
+                    if (disp.Consumo_Electrico == null) { disp.Consumo_Electrico = (int)tbuser2.Rows[0]["Consumo_Electrico"]; }
                     if (disp.Decripcion == null) { disp.Decripcion = tbuser2.Rows[0]["Descripcion"].ToString(); }
                     if (disp.Distribuidor == null) { disp.Distribuidor = tbuser2.Rows[0]["Distribuidor"].ToString(); }
                     if (disp.Dueño == null) { disp.Dueño = tbuser2.Rows[0]["Dueño"].ToString(); }
                     if (disp.Marca == null) { disp.Marca = tbuser2.Rows[0]["Marca"].ToString(); }
-                    if (disp.Tiempo_Garantia == null) { disp.Tiempo_Garantia = (int)tbuser2.Rows[0]["Tiempo de garantia "]; }
+                    if (disp.Tiempo_Garantia == null) { disp.Tiempo_Garantia = (int)tbuser2.Rows[0]["Tiempo_de_garantia "]; }
 
 
                     Proyecto1.DataRequest.BDConection.Editar_Dispositivo(disp.Serie, disp.Marca, disp.Consumo_Electrico, disp.Aposento, disp.Nombre, disp.Decripcion, disp.Tiempo_Garantia, disp.Activo, disp.Historial_Dueños, disp.Distribuidor, disp.AgregadoPor, disp.Dueño);
@@ -270,11 +270,11 @@ namespace Proyecto1.Controllers
             int x = 0;
             while (x < tbuser.Rows.Count)
             {
-                if (fact.Num_Factura == (int)tbuser.Rows[x]["# Factura"])
+                if (fact.Num_Factura == (int)tbuser.Rows[x]["#_Factura"])
                 {
                     return Ok("Ya se ha ingresado ese numero de factura ");
                 }
-                else if (fact.serie == (int)tbuser.Rows[x]["# Serie"])
+                else if (fact.serie == (int)tbuser.Rows[x]["#_Serie"])
                 {
                     return Ok("Ya se ha ingresado ese  numero de serie");
                 }
@@ -307,7 +307,7 @@ namespace Proyecto1.Controllers
             int x = 0;
             while (x < tbuser.Rows.Count)
             {
-                if (gara.Serie == (int)tbuser.Rows[x]["# Serie"])
+                if (gara.Serie == (int)tbuser.Rows[x]["#_Serie"])
                 {
                     return Ok("Ya se ha ingresado ese numero de serie");
                 }

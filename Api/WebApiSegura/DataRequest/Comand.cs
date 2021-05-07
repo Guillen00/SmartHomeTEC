@@ -97,7 +97,7 @@ namespace Proyecto1.DataRequest
         }
         public static DataTable Consultar_DispositivoSerie(int serie)
         {
-            string query = "select * from \"Dispositivo\" " + "where \"# Serie\" = " + serie + "";
+            string query = "select * from \"Dispositivo\" " + "where \"#_Serie\" = " + serie + "";
             NpgsqlCommand conector = new NpgsqlCommand(query, conn);
             NpgsqlDataAdapter datos = new NpgsqlDataAdapter(conector);
             DataTable tabla = new DataTable();
@@ -135,7 +135,7 @@ namespace Proyecto1.DataRequest
 
         public static void Editar_Dispositivo(int serie, string marca, int consumo, string aposento, string nombre, string descripcion, int t_garantia, Boolean activo, string historialDuenos,string distr,string Agregado,string dueño)
         {
-            string query = "Update \"Dispositivo\" set \"# Serie\" =" + serie + ",\"Marca\" = '" + marca + "',\"Consumo Electrico\" = " + consumo + ", \"Aposento\" = '" + aposento + "',\"Nombre\" = '" + nombre + "',\"Descripcion\" = '" + descripcion + "',\"Tiempo de garantia \" = " + t_garantia + ", \"Activo\"= "+activo+ ",\"Historial Dueños\"= '" + historialDuenos+"',\"Distribuidor\"='"+distr + "',\"AgregadoPor\"='" + Agregado + "',\"Dueño\"='" + dueño + "' " + "where \"# Serie\" = " + serie + "";
+            string query = "Update \"Dispositivo\" set \"#_Serie\" =" + serie + ",\"Marca\" = '" + marca + "',\"Consumo_Electrico\" = " + consumo + ", \"Aposento\" = '" + aposento + "',\"Nombre\" = '" + nombre + "',\"Descripcion\" = '" + descripcion + "',\"Tiempo_de_garantia \" = " + t_garantia + ", \"Activo\"= "+activo+ ",\"Historial_Dueños\"= '" + historialDuenos+"',\"Distribuidor\"='"+distr + "',\"AgregadoPor\"='" + Agregado + "',\"Dueño\"='" + dueño + "' " + "where \"#_Serie\" = " + serie + "";
             NpgsqlCommand conector = new NpgsqlCommand(query, conn);
             conn.Close();
             conn.Open();
@@ -165,7 +165,7 @@ namespace Proyecto1.DataRequest
 
         public static DataTable Consultar_Historial(int serie)
         {
-            string query = "select * from \"Historial\" " + "where \"# Serie\" = " + serie + "";
+            string query = "select * from \"Historial\" " + "where \"#_Serie\" = " + serie + "";
             NpgsqlCommand conector = new NpgsqlCommand(query, conn);
             NpgsqlDataAdapter datos = new NpgsqlDataAdapter(conector);
             DataTable tabla = new DataTable();
@@ -186,7 +186,7 @@ namespace Proyecto1.DataRequest
 
         public static DataTable Consultar_Factura(int serie)
         {
-            string query = "select * from \"Factura\" " + "where \"# Serie\" = " + serie + "";
+            string query = "select * from \"Factura\" " + "where \"#_Serie\" = " + serie + "";
             NpgsqlCommand conector = new NpgsqlCommand(query, conn);
             NpgsqlDataAdapter datos = new NpgsqlDataAdapter(conector);
             DataTable tabla = new DataTable();
@@ -218,7 +218,7 @@ namespace Proyecto1.DataRequest
 
         public static DataTable Consultar_Certificado(int serie)
         {
-            string query = "select * from \"Certificado de Garantia\" " + "where \"# Serie\" = " + serie + "";
+            string query = "select * from \"Certificado de Garantia\" " + "where \"#_Serie\" = " + serie + "";
             NpgsqlCommand conector = new NpgsqlCommand(query, conn);
             NpgsqlDataAdapter datos = new NpgsqlDataAdapter(conector);
             DataTable tabla = new DataTable();
@@ -270,7 +270,7 @@ namespace Proyecto1.DataRequest
 
         public static DataTable Consultar_Pedido(int serie)
         {
-            string query = "select * from \"Pedidos\" " + "where \"# Serie\" = " + serie + "";
+            string query = "select * from \"Pedidos\" " + "where \"#_Serie\" = " + serie + "";
             NpgsqlCommand conector = new NpgsqlCommand(query, conn);
             NpgsqlDataAdapter datos = new NpgsqlDataAdapter(conector);
             DataTable tabla = new DataTable();
@@ -279,7 +279,7 @@ namespace Proyecto1.DataRequest
         }
         public static DataTable Consultar_PedidoU(string usuario)
         {
-            string query = "select * from \"Pedidos\"  " + "where \"Usuario\" = '" + usuario + "'"+ "  ORDER BY \"# Pedido\" ASC ";
+            string query = "select * from \"Pedidos\"  " + "where \"Usuario\" = '" + usuario + "'"+ "  ORDER BY \"#_Pedido\" ASC ";
             NpgsqlCommand conector = new NpgsqlCommand(query, conn);
             NpgsqlDataAdapter datos = new NpgsqlDataAdapter(conector);
             DataTable tabla = new DataTable();
@@ -300,7 +300,7 @@ namespace Proyecto1.DataRequest
 
         public static DataTable Consultar_Distribuidor(int Cjuridica)
         {
-            string query = "select * from \"Distribuidores\" " + "where \"Cedula Juridica\" = " + Cjuridica + "";
+            string query = "select * from \"Distribuidores\" " + "where \"Cedula_Juridica\" = " + Cjuridica + "";
             NpgsqlCommand conector = new NpgsqlCommand(query, conn);
             NpgsqlDataAdapter datos = new NpgsqlDataAdapter(conector);
             DataTable tabla = new DataTable();
