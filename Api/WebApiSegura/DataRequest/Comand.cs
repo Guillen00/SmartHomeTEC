@@ -32,6 +32,15 @@ namespace Proyecto1.DataRequest
             datos.Fill(tabla);
             return tabla;
         }
+        public static DataTable Consultar_UsuarioPerfil(string correo)
+        {
+            string query = "select * from \"Usuarios\" where \"Correo\" = '"+ correo +"'";
+            NpgsqlCommand conector = new NpgsqlCommand(query, conn);
+            NpgsqlDataAdapter datos = new NpgsqlDataAdapter(conector);
+            DataTable tabla = new DataTable();
+            datos.Fill(tabla);
+            return tabla;
+        }
 
         public static void Registrar_Usuario(string nombre, string apellido, string correo, string contraseña, string direccion, string continente, string pais)
         {
@@ -303,6 +312,26 @@ namespace Proyecto1.DataRequest
         public static DataTable Reporte_Consumo(string correo,DateTime primer, DateTime segundo)
         {
             string query = "SELECT * FROM \"Dispositivo\" inner join \"Historial\" on \"Historial\".\"# Serie\" = \"Dispositivo\".\"# Serie\" where \"Dueño\" = '"+ correo +"' AND \"Fecha\"  BETWEEN '" + String.Format("{0:d/M/yyyy HH:mm:ss}", primer) + "' AND '"+ String.Format("{0:d/M/yyyy HH:mm:ss}", segundo) + "'  Order by \"Fecha\" ASC; ";
+            NpgsqlCommand conector = new NpgsqlCommand(query, conn);
+            NpgsqlDataAdapter datos = new NpgsqlDataAdapter(conector);
+            DataTable tabla = new DataTable();
+            datos.Fill(tabla);
+            return tabla;
+        }
+
+        public static DataTable Reporte_Dispositivo()
+        {
+            string query = "SELECT \"Nombre\", count(*) FROM \"Dispositivo\" GROUP BY \"Nombre\" HAVING COUNT(*)> 0 Order BY \"count\" DESC; ";
+            NpgsqlCommand conector = new NpgsqlCommand(query, conn);
+            NpgsqlDataAdapter datos = new NpgsqlDataAdapter(conector);
+            DataTable tabla = new DataTable();
+            datos.Fill(tabla);
+            return tabla;
+        }
+
+        public static DataTable Reporte_Periodo_del_dia()
+        {
+            string query = "SELECT \"Fecha\" FROM \"Historial\"  ";
             NpgsqlCommand conector = new NpgsqlCommand(query, conn);
             NpgsqlDataAdapter datos = new NpgsqlDataAdapter(conector);
             DataTable tabla = new DataTable();

@@ -94,4 +94,18 @@ namespace Proyecto1.DataRequest
         public DateTime mes { get; set; }
 
     }
+
+    public class Dashboard
+    {
+        public int DispositivosGestionados { get; set; }
+        public float Promedio { get; set; }
+        public int America { get; set; }
+        public int Europa { get; set; }
+        public int Asia { get; set; }
+        public int Africa { get; set; }
+        public int Oceania { get; set; }
+        public Dispositivo[] Disp { get; set; }
+
+    }
+
 }
