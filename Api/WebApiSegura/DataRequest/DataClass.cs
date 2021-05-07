@@ -104,7 +104,7 @@ namespace Proyecto1.DataRequest
         public int Asia { get; set; }
         public int Africa { get; set; }
         public int Oceania { get; set; }
-        public Dispositivo[] Disp { get; set; }
+        public List<Dispositivo> Disp { get; set; }
 
     }
 

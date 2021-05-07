@@ -95,6 +95,15 @@ namespace Proyecto1.DataRequest
             datos.Fill(tabla);
             return tabla;
         }
+        public static DataTable Consultar_DispositivoSerie(int serie)
+        {
+            string query = "select * from \"Dispositivo\" " + "where \"# Serie\" = " + serie + "";
+            NpgsqlCommand conector = new NpgsqlCommand(query, conn);
+            NpgsqlDataAdapter datos = new NpgsqlDataAdapter(conector);
+            DataTable tabla = new DataTable();
+            datos.Fill(tabla);
+            return tabla;
+        }
         public static DataTable Consultar_Dispositivo_XRegion()
         {
             string query = "SELECT \"NombreD\",\"Continente\" FROM  \"Distribuidores\" inner join \"Dispositivo\" on \"Distribuidor\" = \"NombreD\"; ";

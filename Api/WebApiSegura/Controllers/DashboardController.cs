@@ -21,96 +21,67 @@ namespace Proyecto1.Controllers
         
         //Devuelve cantidad de dispositvos gestionados
         [HttpGet]
-        [Route("dispositivosGestionados")]
+        [Route("All")]
         public IHttpActionResult DispositivosGestionados()
         {
+            //Saca dispositivos gestionados
+            Dashboard dash = new Dashboard();
             DataTable tbuser = Proyecto1.DataRequest.BDConection.Consultar_Dispositivo_Activo();
-
-            return Ok(tbuser.Rows.Count);
-        }
-        //Devuelve cantidad de dispositivos por usuario en promedio
-        [HttpGet]
-        [Route("promedioDXU")]
-        public IHttpActionResult PromedioDispositivoPorUsuario()
-        {
-            DataTable tbuser = Proyecto1.DataRequest.BDConection.Consultar_Dispositivo();
+            dash.DispositivosGestionados = tbuser.Rows.Count;
+            
+            //  Saca un promedio de dispositivos por usuario
+            DataTable tbuser3 = Proyecto1.DataRequest.BDConection.Consultar_Dispositivo();
             DataTable tbuser2 = Proyecto1.DataRequest.BDConection.Consultar_Usuario();
-            float uno = tbuser.Rows.Count;
+            float uno = tbuser3.Rows.Count;
             float dos = tbuser2.Rows.Count;
             float Promedio = uno / dos;
-
-            return Ok(Promedio);
-        }
-
-
-        //Devuelve cantidad de dispositivos por region
-        [HttpGet]
-        [Route("DipositivosXRegion")]
-        public IHttpActionResult DipositivosXRegion()
-        {
-            DataTable tbuser = Proyecto1.DataRequest.BDConection.Consultar_Dispositivo_XRegion();
+            dash.Promedio = Promedio;
+            
+        
+            DataTable tbuser4 = Proyecto1.DataRequest.BDConection.Consultar_Dispositivo_XRegion();
             int america=0, europa=0, asia=0, oceania=0, africa=0,x=0;
             
             while (x < tbuser.Rows.Count) {
-                if (tbuser.Rows[x]["Continente"].ToString() == "America") { america++; }
-                if (tbuser.Rows[x]["Continente"].ToString() == "Europa") { europa++; }
-                if (tbuser.Rows[x]["Continente"].ToString() == "Asia") { asia++; }
-                if (tbuser.Rows[x]["Continente"].ToString() == "Africa") { africa++; }
-                if (tbuser.Rows[x]["Continente"].ToString() == "Oceania") { oceania++; }
+                if (tbuser4.Rows[x]["Continente"].ToString() == "America") { america++; }
+                if (tbuser4.Rows[x]["Continente"].ToString() == "Europa") { europa++; }
+                if (tbuser4.Rows[x]["Continente"].ToString() == "Asia") { asia++; }
+                if (tbuser4.Rows[x]["Continente"].ToString() == "Africa") { africa++; }
+                if (tbuser4.Rows[x]["Continente"].ToString() == "Oceania") { oceania++; }
                 x++;
             }
-        // America, Europa, Asia, Africa, Oceania
-            DataTable tabla = new DataTable();
 
-            // Variables para las columnas y las filas
-            DataColumn column;
-            DataRow row;
-            column = new DataColumn();
-            column.DataType = Type.GetType("System.Int32");
-            column.ColumnName = "America";
-            tabla.Columns.Add(column);
-
-            column = new DataColumn();
-            column.DataType = Type.GetType("System.Int32");
-            column.ColumnName = "Europa";
-            tabla.Columns.Add(column);
-
-            column = new DataColumn();
-            column.DataType = Type.GetType("System.Int32");
-            column.ColumnName = "Asia";
-            tabla.Columns.Add(column);
-
-            column = new DataColumn();
-            column.DataType = Type.GetType("System.Int32");
-            column.ColumnName = "Africa";
-            tabla.Columns.Add(column);
-
-            column = new DataColumn();
-            column.DataType = Type.GetType("System.Int32");
-            column.ColumnName = "Oceania";
-            tabla.Columns.Add(column);
-
-            row = tabla.NewRow();
-            row["America"] = america;
-            row["Europa"] = europa;
-            row["Asia"] = asia;
-            row["Africa"] = africa;
-            row["Oceania"] = oceania;
-            tabla.Rows.Add(row);
-
-            return Ok(tabla);
-
-        }
+            dash.America = america;
+            dash.Africa = africa;
+            dash.Asia = asia;
+            dash.Europa = europa;
+            dash.Oceania = oceania;
 
 
-        //Devuelve cantidad de dispositivos agregados y su estado activo
-        [HttpGet]
-        [Route("Dispositivos")]
-        public IHttpActionResult Dipositivos()
-        {
-            DataTable tbuser = Proyecto1.DataRequest.BDConection.Consultar_Dispositivo();
 
-            return Ok(tbuser);
+
+            DataTable tbuser5 = Proyecto1.DataRequest.BDConection.Consultar_Dispositivo();
+            int i = 0;
+            List<Dispositivo> lista = new List<Dispositivo> { };
+            while (i < tbuser5.Rows.Count) {
+                Dispositivo disp = new Dispositivo();
+                disp.Serie = (int)tbuser5.Rows[i]["# Serie"];
+                disp.Nombre = tbuser5.Rows[i]["Nombre"].ToString();
+                disp.Activo = Convert.ToBoolean(tbuser5.Rows[i]["Activo"]);
+                disp.AgregadoPor = tbuser5.Rows[i]["AgregadoPor"].ToString();
+                disp.Aposento = tbuser5.Rows[i]["Aposento"].ToString();
+                disp.Consumo_Electrico = (int)tbuser5.Rows[i]["Consumo Electrico"];
+                disp.Decripcion = tbuser5.Rows[i]["Descripcion"].ToString();
+                disp.Distribuidor = tbuser5.Rows[i]["Distribuidor"].ToString();
+                disp.Dueño = tbuser5.Rows[i]["Dueño"].ToString();
+                disp.Historial_Dueños = tbuser5.Rows[i]["Historial Dueños"].ToString();
+                disp.Marca = tbuser5.Rows[i]["Marca"].ToString();
+                disp.Tiempo_Garantia = (int)tbuser5.Rows[i]["Tiempo de garantia "];
+                //lista[i] = disp;
+                lista.Add(disp);
+                i++;
+            }
+            dash.Disp = lista;
+            return Ok(dash);
         }
 
         [HttpPost]
