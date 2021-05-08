@@ -25,7 +25,7 @@ namespace Proyecto1.Controllers
             int x = 0;
             while (x < tbuser.Rows.Count) {
                 if (user.Correo == tbuser.Rows[x]["Correo"].ToString()) {
-                    if (user.Contraseña == tbuser.Rows[x]["Contraseña"].ToString()) {
+                    if (user.Contrasena == tbuser.Rows[x]["Contrasena"].ToString()) {
                         return Ok("Correcto");
                     }
                     else return Ok("Contraseña Incorrecta");
@@ -49,7 +49,7 @@ namespace Proyecto1.Controllers
                 }
                 x++;
             }
-            Proyecto1.DataRequest.BDConection.Registrar_Usuario(user.Nombre,user.Apellido,user.Correo,user.Contraseña,user.Direccion,user.Continente,user.Pais);
+            Proyecto1.DataRequest.BDConection.Registrar_Usuario(user.Nombre,user.Apellido,user.Correo,user.Contrasena, user.Direccion,user.Continente,user.Pais);
             Proyecto1.DataRequest.BDConection.Agregar_Aposento(user.Correo, "dormitorio");
             Proyecto1.DataRequest.BDConection.Agregar_Aposento(user.Correo, "cocina");
             Proyecto1.DataRequest.BDConection.Agregar_Aposento(user.Correo, "sala");
@@ -72,11 +72,11 @@ namespace Proyecto1.Controllers
                     if (user.Nombre == null ) { user.Nombre = tbuser2.Rows[0]["Nombre"].ToString(); }
                     if (user.Apellido == null) { user.Apellido = tbuser2.Rows[0]["Apellido"].ToString(); }
                     if (user.Continente == null) { user.Continente = tbuser2.Rows[0]["Continente"].ToString(); }
-                    if (user.Contraseña == null) { user.Contraseña = tbuser2.Rows[0]["Contraseña"].ToString(); }
+                    if (user.Contrasena == null) { user.Contrasena = tbuser2.Rows[0]["Contrasena"].ToString(); }
                     if (user.Direccion == null) { user.Direccion = tbuser2.Rows[0]["Direccion"].ToString(); }
                     if (user.Pais == null) { user.Pais = tbuser2.Rows[0]["Pais"].ToString(); }
                     user.Correo = tbuser2.Rows[0]["Correo"].ToString();
-                    Proyecto1.DataRequest.BDConection.Editar_Usuario(user.Nombre, user.Apellido, user.Correo, user.Contraseña, user.Direccion, user.Continente, user.Pais);
+                    Proyecto1.DataRequest.BDConection.Editar_Usuario(user.Nombre, user.Apellido, user.Correo, user.Contrasena, user.Direccion, user.Continente, user.Pais);
                     return Ok("El Perfil ha sido actualizado ");
                 }
                 x++;

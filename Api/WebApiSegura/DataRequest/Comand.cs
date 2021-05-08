@@ -42,9 +42,9 @@ namespace Proyecto1.DataRequest
             return tabla;
         }
 
-        public static void Registrar_Usuario(string nombre, string apellido, string correo, string contraseña, string direccion, string continente, string pais)
+        public static void Registrar_Usuario(string nombre, string apellido, string correo, string Contrasena, string direccion, string continente, string pais)
         {
-            string query = "Insert into \"Usuarios\" values('"+nombre+"','"+apellido+"','"+correo+"','"+ contraseña+"','"+direccion+"','"+continente+"','"+pais+"')";
+            string query = "Insert into \"Usuarios\" values('"+nombre+"','"+apellido+"','"+correo+"','"+ Contrasena + "','"+direccion+"','"+continente+"','"+pais+"')";
             conn.Close();
             conn.Open();
             NpgsqlCommand conector = new NpgsqlCommand(query, conn);
@@ -52,9 +52,9 @@ namespace Proyecto1.DataRequest
             return; 
         }
 
-        public static void Editar_Usuario(string nombre, string apellido, string correo, string contraseña, string direccion, string continente, string pais)
+        public static void Editar_Usuario(string nombre, string apellido, string correo, string Contrasena, string direccion, string continente, string pais)
         {
-            string query = "Update \"Usuarios\" set \"Nombre\" ='" + nombre + "',\"Apellido\" = '" + apellido + "',\"Correo\" = '" + correo + "', \"Contraseña\" = '" + contraseña + "',\"Direccion\" = '" + direccion + "',\"Continente\" = '" + continente + "',\"Pais\" = '" + pais + "'" + "where \"Correo\" = '"+correo+"'";
+            string query = "Update \"Usuarios\" set \"Nombre\" ='" + nombre + "',\"Apellido\" = '" + apellido + "',\"Correo\" = '" + correo + "', \"Contrasena\" = '" + Contrasena + "',\"Direccion\" = '" + direccion + "',\"Continente\" = '" + continente + "',\"Pais\" = '" + pais + "'" + "where \"Correo\" = '"+correo+"'";
             NpgsqlCommand conector = new NpgsqlCommand(query, conn);
             conn.Close();
             conn.Open();
@@ -122,10 +122,10 @@ namespace Proyecto1.DataRequest
             datos.Fill(tabla);
             return tabla;
         }
-        public static void Agregar_Dispositivo(int serie, string marca, int consumo, string aposento, string nombre, string descripcion, int  t_garantia, Boolean activo, string  historialDuenos ,string distr,string Agregado,string Dueño)
+        public static void Agregar_Dispositivo(int serie, string marca, int consumo, string aposento, string nombre, string descripcion, int  t_garantia, Boolean activo, string  historialDuenos ,string distr,string Agregado,string Dueno)
         {
 
-            string query = "Insert into \"Dispositivo\" values(" + serie + ",'" + marca + "'," + consumo + ",'" + aposento + "','" + nombre + "','" + descripcion + "'," + t_garantia + "," + activo + ", ' " + historialDuenos + "','" + distr + "','" + Agregado + "','"+ Dueño + "')";
+            string query = "Insert into \"Dispositivo\" values(" + serie + ",'" + marca + "'," + consumo + ",'" + aposento + "','" + nombre + "','" + descripcion + "'," + t_garantia + "," + activo + ", ' " + historialDuenos + "','" + distr + "','" + Agregado + "','"+ Dueno + "')";
             conn.Close();
             conn.Open();
             NpgsqlCommand conector = new NpgsqlCommand(query, conn);
@@ -133,9 +133,9 @@ namespace Proyecto1.DataRequest
             return;
         }
 
-        public static void Editar_Dispositivo(int serie, string marca, int consumo, string aposento, string nombre, string descripcion, int t_garantia, Boolean activo, string historialDuenos,string distr,string Agregado,string dueño)
+        public static void Editar_Dispositivo(int serie, string marca, int consumo, string aposento, string nombre, string descripcion, int t_garantia, Boolean activo, string historialDuenos,string distr,string Agregado,string Dueno)
         {
-            string query = "Update \"Dispositivo\" set \"Serie\" =" + serie + ",\"Marca\" = '" + marca + "',\"Consumo_Electrico\" = " + consumo + ", \"Aposento\" = '" + aposento + "',\"Nombre\" = '" + nombre + "',\"Descripcion\" = '" + descripcion + "',\"Tiempo_de_garantia\" = " + t_garantia + ", \"Activo\"= "+activo+ ",\"Historial_Dueños\"= '" + historialDuenos+"',\"Distribuidor\"='"+distr + "',\"AgregadoPor\"='" + Agregado + "',\"Dueño\"='" + dueño + "' " + "where \"Serie\" = " + serie + "";
+            string query = "Update \"Dispositivo\" set \"Serie\" =" + serie + ",\"Marca\" = '" + marca + "',\"Consumo_Electrico\" = " + consumo + ", \"Aposento\" = '" + aposento + "',\"Nombre\" = '" + nombre + "',\"Descripcion\" = '" + descripcion + "',\"Tiempo_Garantia\" = " + t_garantia + ", \"Activo\"= "+activo+ ",\"Historial_Duenos\"= '" + historialDuenos+"',\"Distribuidor\"='"+distr + "',\"AgregadoPor\"='" + Agregado + "',\"Dueno\"='" + Dueno + "' " + "where \"Serie\" = " + serie + "";
             NpgsqlCommand conector = new NpgsqlCommand(query, conn);
             conn.Close();
             conn.Open();
@@ -320,7 +320,7 @@ namespace Proyecto1.DataRequest
         //----------------------------------------------------------------Reportes---------------------------------------------------
         public static DataTable Reporte_Consumo(string correo,DateTime primer, DateTime segundo)
         {
-            string query = "SELECT * FROM \"Dispositivo\" inner join \"Historial\" on \"Historial\".\"Serie\" = \"Dispositivo\".\"Serie\" where \"Dueño\" = '"+ correo +"' AND \"Fecha\"  BETWEEN '" + String.Format("{0:d/M/yyyy HH:mm:ss}", primer) + "' AND '"+ String.Format("{0:d/M/yyyy HH:mm:ss}", segundo) + "'  Order by \"Fecha\" ASC; ";
+            string query = "SELECT * FROM \"Dispositivo\" inner join \"Historial\" on \"Historial\".\"Serie\" = \"Dispositivo\".\"Serie\" where \"Dueno\" = '"+ correo +"' AND \"Fecha\"  BETWEEN '" + String.Format("{0:d/M/yyyy HH:mm:ss}", primer) + "' AND '"+ String.Format("{0:d/M/yyyy HH:mm:ss}", segundo) + "'  Order by \"Fecha\" ASC; ";
             NpgsqlCommand conector = new NpgsqlCommand(query, conn);
             NpgsqlDataAdapter datos = new NpgsqlDataAdapter(conector);
             DataTable tabla = new DataTable();

@@ -36,7 +36,7 @@ namespace Proyecto1.Controllers
                 }
                 x++;
             }
-            Proyecto1.DataRequest.BDConection.Agregar_Dispositivo(disp.Serie,disp.Marca,disp.Consumo_Electrico,disp.Aposento,disp.Nombre,disp.Decripcion,disp.Tiempo_Garantia,disp.Activo,disp.Historial_Dueños,disp.Distribuidor,disp.AgregadoPor,disp.Dueño);
+            Proyecto1.DataRequest.BDConection.Agregar_Dispositivo(disp.Serie,disp.Marca,disp.Consumo_Electrico,disp.Aposento,disp.Nombre,disp.Decripcion,disp.Tiempo_Garantia,disp.Activo,disp.Historial_Duenos,disp.Distribuidor,disp.AgregadoPor,disp.Dueno);
             return Ok("El dispositivo se ha agregado exitosamente");
         }
 
@@ -57,17 +57,17 @@ namespace Proyecto1.Controllers
                     if (disp.Activo == null) { disp.Activo = Convert.ToBoolean(tbuser2.Rows[0]["Activo"]); }
                     if (disp.AgregadoPor == null) { disp.AgregadoPor = tbuser2.Rows[0]["AgregadoPor"].ToString(); }
                     if (disp.Aposento == null) { disp.Aposento = tbuser2.Rows[0]["Aposento"].ToString(); }
-                    if (disp.Historial_Dueños == null) { disp.Historial_Dueños = tbuser2.Rows[0]["Historial_Dueños"].ToString(); }
+                    if (disp.Historial_Duenos == null) { disp.Historial_Duenos = tbuser2.Rows[0]["Historial_Duenos"].ToString(); }
                     disp.Serie = (int)tbuser2.Rows[0]["Serie"];
-                    if (disp.Consumo_Electrico == null) { disp.Consumo_Electrico = (int)tbuser2.Rows[0]["Consumo_Electrico"]; }
+                    if (disp.Consumo_Electrico == 0) { disp.Consumo_Electrico = (int)tbuser2.Rows[0]["Consumo_Electrico"]; }
                     if (disp.Decripcion == null) { disp.Decripcion = tbuser2.Rows[0]["Descripcion"].ToString(); }
                     if (disp.Distribuidor == null) { disp.Distribuidor = tbuser2.Rows[0]["Distribuidor"].ToString(); }
-                    if (disp.Dueño == null) { disp.Dueño = tbuser2.Rows[0]["Dueño"].ToString(); }
+                    if (disp.Dueno == null) { disp.Dueno = tbuser2.Rows[0]["Dueno"].ToString(); }
                     if (disp.Marca == null) { disp.Marca = tbuser2.Rows[0]["Marca"].ToString(); }
-                    if (disp.Tiempo_Garantia == null) { disp.Tiempo_Garantia = (int)tbuser2.Rows[0]["Tiempo_de_garantia"]; }
+                    if (disp.Tiempo_Garantia == 0) { disp.Tiempo_Garantia = (int)tbuser2.Rows[0]["Tiempo_Garantia"]; }
 
 
-                    Proyecto1.DataRequest.BDConection.Editar_Dispositivo(disp.Serie, disp.Marca, disp.Consumo_Electrico, disp.Aposento, disp.Nombre, disp.Decripcion, disp.Tiempo_Garantia, disp.Activo, disp.Historial_Dueños,disp.Distribuidor,disp.AgregadoPor,disp.Dueño);
+                    Proyecto1.DataRequest.BDConection.Editar_Dispositivo(disp.Serie, disp.Marca, disp.Consumo_Electrico, disp.Aposento, disp.Nombre, disp.Decripcion, disp.Tiempo_Garantia, disp.Activo, disp.Historial_Duenos,disp.Distribuidor,disp.AgregadoPor,disp.Dueno);
                     return Ok("El dispositivo ha sido actualizado ");
                 }
                 x++;
@@ -92,17 +92,17 @@ namespace Proyecto1.Controllers
                     if (disp.Activo == null) { disp.Activo = Convert.ToBoolean(tbuser2.Rows[0]["Activo"]); }
                     if (disp.AgregadoPor == null) { disp.AgregadoPor = tbuser2.Rows[0]["AgregadoPor"].ToString(); }
                     if (disp.Aposento == null) { disp.Aposento = tbuser2.Rows[0]["Aposento"].ToString(); }
-                    if (disp.Historial_Dueños == null) { disp.Historial_Dueños = tbuser2.Rows[0]["Historial_Dueños"].ToString(); }
+                    if (disp.Historial_Duenos == null) { disp.Historial_Duenos = tbuser2.Rows[0]["Historial_Duenos"].ToString(); }
                     disp.Serie = (int)tbuser2.Rows[0]["Serie"];
-                    if (disp.Consumo_Electrico == null) { disp.Consumo_Electrico = (int)tbuser2.Rows[0]["Consumo_Electrico"]; }
+                    if (disp.Consumo_Electrico == 0) { disp.Consumo_Electrico = (int)tbuser2.Rows[0]["Consumo_Electrico"]; }
                     if (disp.Decripcion == null) { disp.Decripcion = tbuser2.Rows[0]["Descripcion"].ToString(); }
                     if (disp.Distribuidor == null) { disp.Distribuidor = tbuser2.Rows[0]["Distribuidor"].ToString(); }
-                    if (disp.Dueño == null) { disp.Dueño = tbuser2.Rows[0]["Dueño"].ToString(); }
+                    if (disp.Dueno == null) { disp.Dueno = tbuser2.Rows[0]["Dueno"].ToString(); }
                     if (disp.Marca == null) { disp.Marca = tbuser2.Rows[0]["Marca"].ToString(); }
-                    if (disp.Tiempo_Garantia == null) { disp.Tiempo_Garantia = (int)tbuser2.Rows[0]["Tiempo_de_garantia"]; }
+                    if (disp.Tiempo_Garantia == 0) { disp.Tiempo_Garantia = (int)tbuser2.Rows[0]["Tiempo_Garantia"]; }
 
 
-                    Proyecto1.DataRequest.BDConection.Editar_Dispositivo(disp.Serie, disp.Marca, disp.Consumo_Electrico, disp.Aposento, disp.Nombre, disp.Decripcion, disp.Tiempo_Garantia, disp.Activo, disp.Historial_Dueños, disp.Distribuidor, disp.AgregadoPor, disp.Dueño);
+                    Proyecto1.DataRequest.BDConection.Editar_Dispositivo(disp.Serie, disp.Marca, disp.Consumo_Electrico, disp.Aposento, disp.Nombre, disp.Decripcion, disp.Tiempo_Garantia, disp.Activo, disp.Historial_Duenos, disp.Distribuidor, disp.AgregadoPor, disp.Dueno);
                     return Ok("El dispositivo ha sido actualizado ");
                 }
                 x++;
@@ -131,7 +131,16 @@ namespace Proyecto1.Controllers
 
             return Ok("El dispositivo ha sido eliminado exitosamente");
         }
+        //Ordena los dispositivos por region
+        [HttpGet]
+        [Route("PorRegion")]
+        public IHttpActionResult Consulta_Dispositivos_Region()
+        {
 
+
+
+            return Ok("Listo");
+        }
 
         //----------------------------------------------Historial-------------------------------
         //Agrega historial a base de datos
@@ -330,7 +339,18 @@ namespace Proyecto1.Controllers
             return Ok(tbuser);
         }
 
+        //------------------------------------------------------------Excel--------------------------------------------
+        [HttpPost]
+        [Route("Excel")]
+        public IHttpActionResult Excel(List<Dispositivo> disp)
+        {
+           
 
 
+            return Ok("Si funciona");
+        }
+
+        ///----------------------------------------------------------Tienda en linea-----------------------------------
+        
     }
 }

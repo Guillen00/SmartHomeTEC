@@ -72,10 +72,10 @@ namespace Proyecto1.Controllers
                 disp.Consumo_Electrico = (int)tbuser5.Rows[i]["Consumo_Electrico"];
                 disp.Decripcion = tbuser5.Rows[i]["Descripcion"].ToString();
                 disp.Distribuidor = tbuser5.Rows[i]["Distribuidor"].ToString();
-                disp.Dueño = tbuser5.Rows[i]["Dueño"].ToString();
-                disp.Historial_Dueños = tbuser5.Rows[i]["Historial_Dueños"].ToString();
+                disp.Dueno = tbuser5.Rows[i]["Dueno"].ToString();
+                disp.Historial_Duenos = tbuser5.Rows[i]["Historial_Duenos"].ToString();
                 disp.Marca = tbuser5.Rows[i]["Marca"].ToString();
-                disp.Tiempo_Garantia = (int)tbuser5.Rows[i]["Tiempo_de_garantia"];
+                disp.Tiempo_Garantia = (int)tbuser5.Rows[i]["Tiempo_Garantia"];
                 //lista[i] = disp;
                 lista.Add(disp);
                 i++;

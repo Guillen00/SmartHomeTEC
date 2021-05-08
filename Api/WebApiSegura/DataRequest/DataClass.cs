@@ -15,10 +15,10 @@ namespace Proyecto1.DataRequest
         public string Decripcion { get; set; }
         public int Tiempo_Garantia { get; set; }
         public Boolean Activo { get; set; }
-        public string Historial_Dueños { get; set; }
+        public string Historial_Duenos { get; set; }
         public string Distribuidor { get; set; }
         public string AgregadoPor { get; set; }
-        public string Dueño { get; set; }
+        public string Dueno { get; set; }
     }
 
     public class Historial
@@ -43,7 +43,7 @@ namespace Proyecto1.DataRequest
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public string Correo { get; set; }
-        public string Contraseña { get; set; }
+        public string Contrasena { get; set; }
         public string Direccion { get; set; }
         public string Continente { get; set; }
         public string Pais { get; set; }
