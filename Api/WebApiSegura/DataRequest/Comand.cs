@@ -97,7 +97,7 @@ namespace Proyecto1.DataRequest
         }
         public static DataTable Consultar_DispositivoSerie(int serie)
         {
-            string query = "select * from \"Dispositivo\" " + "where \"#_Serie\" = " + serie + "";
+            string query = "select * from \"Dispositivo\" " + "where \"Serie\" = " + serie + "";
             NpgsqlCommand conector = new NpgsqlCommand(query, conn);
             NpgsqlDataAdapter datos = new NpgsqlDataAdapter(conector);
             DataTable tabla = new DataTable();
@@ -135,7 +135,7 @@ namespace Proyecto1.DataRequest
 
         public static void Editar_Dispositivo(int serie, string marca, int consumo, string aposento, string nombre, string descripcion, int t_garantia, Boolean activo, string historialDuenos,string distr,string Agregado,string dueño)
         {
-            string query = "Update \"Dispositivo\" set \"#_Serie\" =" + serie + ",\"Marca\" = '" + marca + "',\"Consumo_Electrico\" = " + consumo + ", \"Aposento\" = '" + aposento + "',\"Nombre\" = '" + nombre + "',\"Descripcion\" = '" + descripcion + "',\"Tiempo_de_garantia \" = " + t_garantia + ", \"Activo\"= "+activo+ ",\"Historial_Dueños\"= '" + historialDuenos+"',\"Distribuidor\"='"+distr + "',\"AgregadoPor\"='" + Agregado + "',\"Dueño\"='" + dueño + "' " + "where \"#_Serie\" = " + serie + "";
+            string query = "Update \"Dispositivo\" set \"Serie\" =" + serie + ",\"Marca\" = '" + marca + "',\"Consumo_Electrico\" = " + consumo + ", \"Aposento\" = '" + aposento + "',\"Nombre\" = '" + nombre + "',\"Descripcion\" = '" + descripcion + "',\"Tiempo_de_garantia\" = " + t_garantia + ", \"Activo\"= "+activo+ ",\"Historial_Dueños\"= '" + historialDuenos+"',\"Distribuidor\"='"+distr + "',\"AgregadoPor\"='" + Agregado + "',\"Dueño\"='" + dueño + "' " + "where \"Serie\" = " + serie + "";
             NpgsqlCommand conector = new NpgsqlCommand(query, conn);
             conn.Close();
             conn.Open();
@@ -145,7 +145,7 @@ namespace Proyecto1.DataRequest
 
         public static void Borrar_Dispositivo(int serie)
         {
-            string query = "Delete from \"Dispositivo\" " + "where \"# Serie\" = " + serie + "";
+            string query = "Delete from \"Dispositivo\" " + "where \"Serie\" = " + serie + "";
             NpgsqlCommand conector = new NpgsqlCommand(query, conn);
             conn.Close();
             conn.Open();
@@ -165,7 +165,7 @@ namespace Proyecto1.DataRequest
 
         public static DataTable Consultar_Historial(int serie)
         {
-            string query = "select * from \"Historial\" " + "where \"#_Serie\" = " + serie + "";
+            string query = "select * from \"Historial\" " + "where \"Serie\" = " + serie + "";
             NpgsqlCommand conector = new NpgsqlCommand(query, conn);
             NpgsqlDataAdapter datos = new NpgsqlDataAdapter(conector);
             DataTable tabla = new DataTable();
@@ -186,7 +186,7 @@ namespace Proyecto1.DataRequest
 
         public static DataTable Consultar_Factura(int serie)
         {
-            string query = "select * from \"Factura\" " + "where \"#_Serie\" = " + serie + "";
+            string query = "select * from \"Factura\" " + "where \"Serie\" = " + serie + "";
             NpgsqlCommand conector = new NpgsqlCommand(query, conn);
             NpgsqlDataAdapter datos = new NpgsqlDataAdapter(conector);
             DataTable tabla = new DataTable();
@@ -218,7 +218,7 @@ namespace Proyecto1.DataRequest
 
         public static DataTable Consultar_Certificado(int serie)
         {
-            string query = "select * from \"Certificado de Garantia\" " + "where \"#_Serie\" = " + serie + "";
+            string query = "select * from \"Certificado de Garantia\" " + "where \"Serie\" = " + serie + "";
             NpgsqlCommand conector = new NpgsqlCommand(query, conn);
             NpgsqlDataAdapter datos = new NpgsqlDataAdapter(conector);
             DataTable tabla = new DataTable();
@@ -270,7 +270,7 @@ namespace Proyecto1.DataRequest
 
         public static DataTable Consultar_Pedido(int serie)
         {
-            string query = "select * from \"Pedidos\" " + "where \"#_Serie\" = " + serie + "";
+            string query = "select * from \"Pedidos\" " + "where \"Serie\" = " + serie + "";
             NpgsqlCommand conector = new NpgsqlCommand(query, conn);
             NpgsqlDataAdapter datos = new NpgsqlDataAdapter(conector);
             DataTable tabla = new DataTable();
@@ -320,7 +320,7 @@ namespace Proyecto1.DataRequest
         //----------------------------------------------------------------Reportes---------------------------------------------------
         public static DataTable Reporte_Consumo(string correo,DateTime primer, DateTime segundo)
         {
-            string query = "SELECT * FROM \"Dispositivo\" inner join \"Historial\" on \"Historial\".\"# Serie\" = \"Dispositivo\".\"# Serie\" where \"Dueño\" = '"+ correo +"' AND \"Fecha\"  BETWEEN '" + String.Format("{0:d/M/yyyy HH:mm:ss}", primer) + "' AND '"+ String.Format("{0:d/M/yyyy HH:mm:ss}", segundo) + "'  Order by \"Fecha\" ASC; ";
+            string query = "SELECT * FROM \"Dispositivo\" inner join \"Historial\" on \"Historial\".\"Serie\" = \"Dispositivo\".\"Serie\" where \"Dueño\" = '"+ correo +"' AND \"Fecha\"  BETWEEN '" + String.Format("{0:d/M/yyyy HH:mm:ss}", primer) + "' AND '"+ String.Format("{0:d/M/yyyy HH:mm:ss}", segundo) + "'  Order by \"Fecha\" ASC; ";
             NpgsqlCommand conector = new NpgsqlCommand(query, conn);
             NpgsqlDataAdapter datos = new NpgsqlDataAdapter(conector);
             DataTable tabla = new DataTable();

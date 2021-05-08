@@ -64,7 +64,7 @@ namespace Proyecto1.Controllers
             List<Dispositivo> lista = new List<Dispositivo> { };
             while (i < tbuser5.Rows.Count) {
                 Dispositivo disp = new Dispositivo();
-                disp.Serie = (int)tbuser5.Rows[i]["#_Serie"];
+                disp.Serie = (int)tbuser5.Rows[i]["Serie"];
                 disp.Nombre = tbuser5.Rows[i]["Nombre"].ToString();
                 disp.Activo = Convert.ToBoolean(tbuser5.Rows[i]["Activo"]);
                 disp.AgregadoPor = tbuser5.Rows[i]["AgregadoPor"].ToString();
@@ -75,7 +75,7 @@ namespace Proyecto1.Controllers
                 disp.Dueño = tbuser5.Rows[i]["Dueño"].ToString();
                 disp.Historial_Dueños = tbuser5.Rows[i]["Historial_Dueños"].ToString();
                 disp.Marca = tbuser5.Rows[i]["Marca"].ToString();
-                disp.Tiempo_Garantia = (int)tbuser5.Rows[i]["Tiempo_de_garantia "];
+                disp.Tiempo_Garantia = (int)tbuser5.Rows[i]["Tiempo_de_garantia"];
                 //lista[i] = disp;
                 lista.Add(disp);
                 i++;
