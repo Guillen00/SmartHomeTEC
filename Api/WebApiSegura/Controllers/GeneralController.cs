@@ -133,13 +133,13 @@ namespace Proyecto1.Controllers
         }
         //Ordena los dispositivos por region
         [HttpGet]
-        [Route("PorRegion")]
+        [Route("DispositivoPorRegion")]
         public IHttpActionResult Consulta_Dispositivos_Region()
         {
+            DataTable tbuser = Proyecto1.DataRequest.BDConection.Consultar_DispositivoXRegion();
 
 
-
-            return Ok("Listo");
+            return Ok(tbuser);
         }
 
         //----------------------------------------------Historial-------------------------------
@@ -342,12 +342,97 @@ namespace Proyecto1.Controllers
         //------------------------------------------------------------Excel--------------------------------------------
         [HttpPost]
         [Route("Excel")]
-        public IHttpActionResult Excel(List<Dispositivo> disp)
+        public IHttpActionResult Excel(List<Dispositivo> disp1)
         {
-           
+            DataTable tbuser = Proyecto1.DataRequest.BDConection.Consultar_Dispositivo();
+            int i = 0;
+            int j = 0;
+            List<Dispositivo> disp = new List<Dispositivo> { };
+            disp = disp1;
+            List<int> nueva = new List<int> { };
 
+            string repetidos = "";
+            while (i < (disp1.Count ))
+            {
+                while (j < (tbuser.Rows.Count))
+                {
+                    if (disp1[i].Serie == (int)tbuser.Rows[j]["Serie"]) {
+                        nueva.Add(i);
+                        repetidos = repetidos + tbuser.Rows[j]["Serie"].ToString()+"-";
+                    }
+                    j++;
+                }
+                j = 0;
+                i++;
+            }
+            i = 0;
+            if (nueva.Count < disp1.Count)
+            {
+                while (i < nueva.Count)
+                {
+                    disp.RemoveAt(nueva[i]);
+                    i++;
+                }
+            }
 
-            return Ok("Si funciona");
+            
+            string tabla1 = "Insert into \"Dispositivo\"  values";
+            string tabla2 = "Insert into \"Distribuidores\"  values";
+            string value1 = "";
+            string value2 = "";
+            int x = 0;
+            
+            if (repetidos == "")
+            {
+                x = 0;
+                while (x < (disp.Count - 1))
+                {
+                    value1 = "(" + disp[x].Serie + ",'" + disp[x].Marca + "'," + disp[x].Consumo_Electrico + ",' ','" + disp[x].Nombre + "','" + disp[x].Decripcion + "'," + disp[x].Tiempo_Garantia + "," + false + ",'  ','" + disp[x].Distribuidor + "','" + disp[x].AgregadoPor + "',' '" + "),";
+                    value2 = " ";
+
+                    tabla1 = tabla1 + value1;
+                    value1 = " ";
+                    x++;
+                }
+                x = disp.Count - 1;
+                value1 = "(" + disp[x].Serie + ",'" + disp[x].Marca + "'," + disp[x].Consumo_Electrico + ",' ','" + disp[x].Nombre + "','" + disp[x].Decripcion + "'," + disp[x].Tiempo_Garantia + "," + false + ",'  ','" + disp[x].Distribuidor + "','" + disp[x].AgregadoPor + "',' '" + ")";
+                tabla1 = tabla1 + value1;
+                Proyecto1.DataRequest.BDConection.Insertar_Excel(tabla1);
+                return Ok("Base de datos actualizada");
+            }
+            else if (1 == disp1.Count)
+            {
+                return Ok("Los dispositivos con los siguintes numeros de serie no se agregaron, porque esa serie ya ha sido ingresada :" + repetidos);
+
+            }
+            else if (nueva.Count+1 == disp1.Count)
+            {
+                x = 0;
+                value1 = "(" + disp[x].Serie + ",'" + disp[x].Marca + "'," + disp[x].Consumo_Electrico + ",' ','" + disp[x].Nombre + "','" + disp[x].Decripcion + "'," + disp[x].Tiempo_Garantia + "," + false + ",'  ','" + disp[x].Distribuidor + "','" + disp[x].AgregadoPor + "',' '" + ")";
+                tabla1 = tabla1 + value1;
+                Proyecto1.DataRequest.BDConection.Insertar_Excel(tabla1);
+                return Ok("Base de datos actualizada");
+
+            }
+
+            else
+            {
+                x = 0;
+                while (x < (disp.Count - 1))
+                {
+                    value1 = "(" + disp[x].Serie + ",'" + disp[x].Marca + "'," + disp[x].Consumo_Electrico + ",' ','" + disp[x].Nombre + "','" + disp[x].Decripcion + "'," + disp[x].Tiempo_Garantia + "," + false + ",'  ','" + disp[x].Distribuidor + "','" + disp[x].AgregadoPor + "',' '" + "),";
+                    value2 = " ";
+
+                    tabla1 = tabla1 + value1;
+                    value1 = " ";
+                    x++;
+                }
+                x = disp.Count - 1;
+                value1 = "(" + disp[x].Serie + ",'" + disp[x].Marca + "'," + disp[x].Consumo_Electrico + ",' ','" + disp[x].Nombre + "','" + disp[x].Decripcion + "'," + disp[x].Tiempo_Garantia + "," + false + ",'  ','" + disp[x].Distribuidor + "','" + disp[x].AgregadoPor + "',' '" + ")";
+                tabla1 = tabla1 + value1;
+                Proyecto1.DataRequest.BDConection.Insertar_Excel(tabla1);
+                return Ok("Los dispositivos con los siguintes numeros de serie no se agregaron, porque esa serie ya ha sido ingresada :" + repetidos);
+            }
         }
 
         ///----------------------------------------------------------Tienda en linea-----------------------------------

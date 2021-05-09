@@ -153,6 +153,16 @@ namespace Proyecto1.DataRequest
             conn.Close();
             return;
         }
+
+        public static DataTable Consultar_DispositivoXRegion()
+        {
+            string query = "SELECT * FROM \"Dispositivo\" inner join \"Distribuidores\" on \"Distribuidores\".\"NombreD\" = \"Dispositivo\".\"Distribuidor\"   Order by \"Continente\" ASC; ";
+            NpgsqlCommand conector = new NpgsqlCommand(query, conn);
+            NpgsqlDataAdapter datos = new NpgsqlDataAdapter(conector);
+            DataTable tabla = new DataTable();
+            datos.Fill(tabla);
+            return tabla;
+        }
         //------------------------------------Historial-------------------------------
         public static void Agregar_Historial(int serie,DateTime fecha,int Tencendido) { 
             string query = "Insert into \"Historial\" values(" + serie + ",'" + String.Format("{0:d/M/yyyy HH:mm:ss}", fecha) + "'," + Tencendido + ")";
@@ -341,6 +351,16 @@ namespace Proyecto1.DataRequest
         public static DataTable Reporte_Periodo_del_dia()
         {
             string query = "SELECT \"Fecha\" FROM \"Historial\"  ";
+            NpgsqlCommand conector = new NpgsqlCommand(query, conn);
+            NpgsqlDataAdapter datos = new NpgsqlDataAdapter(conector);
+            DataTable tabla = new DataTable();
+            datos.Fill(tabla);
+            return tabla;
+        }
+        //--------------------------------------------------------------------Excel----------------------------------------
+        public static DataTable Insertar_Excel(string query)
+        {
+           
             NpgsqlCommand conector = new NpgsqlCommand(query, conn);
             NpgsqlDataAdapter datos = new NpgsqlDataAdapter(conector);
             DataTable tabla = new DataTable();
