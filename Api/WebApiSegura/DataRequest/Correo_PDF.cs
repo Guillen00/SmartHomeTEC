@@ -2,34 +2,43 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Net.Mail;
-using System.Configuration;
-using System.Web.Configuration;
-using System.Net.Configuration;
-using System.Net;
-using System.Security.Cryptography.X509Certificates;
-using System.Net.Security;
+using EASendMail;
 
 namespace Proyecto1.DataRequest
 {
     public class Correo_PDF
     {
-        public static void Enviar_Correo() {
-            MailMessage correo = new MailMessage();
-            correo.From = new MailAddress("leonardoguillen946@gmail.com", "Leonardo Guillen", System.Text.Encoding.UTF8);//Correo de salida
-            correo.To.Add("leoguillen@estudiantec.cr"); //Correo destino?
-            correo.Subject = "Correo de prueba"; //Asunto
-            correo.Body = "Este es un correo de prueba desde c#"; //Mensaje del correo
-            correo.IsBodyHtml = true;
-            correo.Priority = MailPriority.Normal;
-            SmtpClient smtp = new SmtpClient();
-            smtp.UseDefaultCredentials = false;
-            smtp.Host = "smtp.gmail.com"; //Host del servidor de correo
-            smtp.Port = 25; //Puerto de salida
-            smtp.Credentials = new System.Net.NetworkCredential("leonardoguillen946@gmail.com", "guillen1");//Cuenta de correo
-            ServicePointManager.ServerCertificateValidationCallback = delegate (object s, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) { return true; };
-            smtp.EnableSsl = true;//True si el servidor de correo permite ssl
-            smtp.Send(correo);
+        public static string EnviarCorreo(string correoDestino, string asunto, string mensajeCorreo)
+        {
+            string mensaje = "Error al enviar correo.";
+
+            try
+            {
+                SmtpMail objetoCorreo = new SmtpMail("TryIt");
+
+                objetoCorreo.From = "smarthometec2021@gmail.com";
+                objetoCorreo.To = "leonardoguillen946@gmail.com";
+                objetoCorreo.Subject = asunto;
+                objetoCorreo.TextBody = mensajeCorreo;
+
+                SmtpServer objetoServidor = new SmtpServer("smtp.gmail.com");
+
+                objetoServidor.User = "smarthometec2021@gmail.com";
+                objetoServidor.Password = "profesor2021";
+                objetoServidor.Port = 587;
+                objetoServidor.ConnectType = SmtpConnectType.ConnectSSLAuto;
+
+                SmtpClient objetoCliente = new SmtpClient();
+                objetoCliente.SendMail(objetoServidor, objetoCorreo);
+                mensaje = "Correo Enviado Correctamente.";
+
+
+            }
+            catch (Exception ex)
+            {
+                mensaje = "Error al enviar correo." + ex.Message;
+            }
+            return mensaje;
         }
     }
 }

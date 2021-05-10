@@ -126,9 +126,9 @@ namespace Proyecto1.Controllers
         [Route("EnviarCorreo")]
         public IHttpActionResult Enviar_CorreoPDF()
         {
-            Proyecto1.DataRequest.Correo_PDF.Enviar_Correo();
             
-            return Ok("Se envio el correo");
+            
+            return Ok(Proyecto1.DataRequest.Correo_PDF.EnviarCorreo("la","le","li"));
         }
     }
 }

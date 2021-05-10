@@ -147,3 +147,4 @@ C:\Users\leona\Source\Repos\SmartHomeTEC\Api\WebApiSegura\bin\System.Threading.T
 C:\Users\leona\Source\Repos\SmartHomeTEC\Api\WebApiSegura\bin\System.ValueTuple.xml
 C:\Users\leona\Source\Repos\SmartHomeTEC\Api\WebApiSegura\obj\Debug\Poyecto1.dll
 C:\Users\leona\Source\Repos\SmartHomeTEC\Api\WebApiSegura\obj\Debug\Poyecto1.pdb
+C:\Users\leona\Source\Repos\SmartHomeTEC\Api\WebApiSegura\bin\EASendMail.dll
