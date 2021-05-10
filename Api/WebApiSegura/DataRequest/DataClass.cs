@@ -84,7 +84,7 @@ namespace Proyecto1.DataRequest
     public class Aposentos
     {
         public string Correo { get; set; }
-        public string Nombre { get; set; }
+        public string Aposento { get; set; }
 
     }
 

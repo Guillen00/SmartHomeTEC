@@ -246,13 +246,13 @@ namespace Proyecto1.Controllers
             int x = 0;
             while (x < tbuser.Rows.Count)
             {
-                if (apo.Nombre == tbuser.Rows[x]["Nombre"].ToString())
+                if (apo.Aposento == tbuser.Rows[x]["Aposento"].ToString())
                 {
                     return Ok("El Aposento ya ha sido ingresado");
                 }
                 x++;
             }
-            Proyecto1.DataRequest.BDConection.Agregar_Aposento(apo.Correo,apo.Nombre);
+            Proyecto1.DataRequest.BDConection.Agregar_Aposento(apo.Correo,apo.Aposento);
             return Ok("El Aposento se ha agregado exitosamente");
         }
 
