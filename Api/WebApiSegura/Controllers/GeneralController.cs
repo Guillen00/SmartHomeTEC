@@ -342,12 +342,13 @@ namespace Proyecto1.Controllers
         //------------------------------------------------------------Excel--------------------------------------------
         [HttpPost]
         [Route("Excel")]
-        public IHttpActionResult Excel(List<Dispositivo> disp1)
+        public IHttpActionResult Excel(Hoja disp2)
         {
             DataTable tbuser = Proyecto1.DataRequest.BDConection.Consultar_Dispositivo();
             int i = 0;
             int j = 0;
             List<Dispositivo> disp = new List<Dispositivo> { };
+            List<Dispositivo> disp1 = disp2.Hoja1;
             disp = disp1;
             List<int> nueva = new List<int> { };
 

@@ -107,5 +107,9 @@ namespace Proyecto1.DataRequest
         public List<Dispositivo> Disp { get; set; }
 
     }
+    public class Hoja
+    {
+        public List<Dispositivo> Hoja1 { get; set; }
 
-}
+    }
+    }
