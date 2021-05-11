@@ -99,6 +99,17 @@ namespace Proyecto1.Controllers
         [Route("BorrarUsuario")]
         public IHttpActionResult Borrar_Usuario(Usuario user)
         {
+            Proyecto1.DataRequest.BDConection.Borrar_Aposento(user.Correo);
+            DataTable tbuser = Proyecto1.DataRequest.BDConection.Consultar_DispositivoCorreo(user.Correo);
+            int x = 0;
+            while (x < tbuser.Rows.Count)
+            {
+                Proyecto1.DataRequest.BDConection.Editar_Dispositivo((int)tbuser.Rows[x]["Serie"], tbuser.Rows[x]["Marca"].ToString(), (int)tbuser.Rows[x]["Consumo_Electrico"], tbuser.Rows[x]["Aposento"].ToString(), tbuser.Rows[x]["Nombre"].ToString(), tbuser.Rows[x]["Descripcion"].ToString(),  (int)tbuser.Rows[x]["Tiempo_Garantia"], false, tbuser.Rows[x]["Historial_Duenos"].ToString()+","+ tbuser.Rows[x]["Dueno"].ToString(), tbuser.Rows[x]["Distribuidor"].ToString(), tbuser.Rows[x]["AgregadoPor"].ToString(), " ");
+                x++;
+            }
+
+            Proyecto1.DataRequest.BDConection.Borrar_Pedidos(user.Correo);
+             
             Proyecto1.DataRequest.BDConection.Borrar_Usuario(user.Correo);
 
 

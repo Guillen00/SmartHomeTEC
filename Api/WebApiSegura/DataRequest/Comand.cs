@@ -172,6 +172,15 @@ namespace Proyecto1.DataRequest
             datos.Fill(tabla);
             return tabla;
         }
+        public static DataTable Consultar_DispositivoCorreo(string correo)
+        {
+            string query = "select * from \"Dispositivo\" " + "where \"Dueno\" = '" + correo + "'";
+            NpgsqlCommand conector = new NpgsqlCommand(query, conn);
+            NpgsqlDataAdapter datos = new NpgsqlDataAdapter(conector);
+            DataTable tabla = new DataTable();
+            datos.Fill(tabla);
+            return tabla;
+        }
         //------------------------------------Historial-------------------------------
         public static void Agregar_Historial(int serie,DateTime fecha,int Tencendido) { 
             string query = "Insert into \"Historial\" values(" + serie + ",'" + String.Format("{0:d/M/yyyy HH:mm:ss}", fecha) + "'," + Tencendido + ")";
@@ -222,7 +231,7 @@ namespace Proyecto1.DataRequest
             datos.Fill(tabla);
             return tabla;
         }
-
+        
         //-----------------------------------------------------------Certificado---------------------------------------------
 
         public static void Agregar_Certificado( DateTime Tcompra, DateTime Tfin, string marca, string nombre,int serie)
@@ -274,7 +283,16 @@ namespace Proyecto1.DataRequest
             datos.Fill(tabla);
             return tabla;
         }
-
+        public static void Borrar_Aposento(string correo)
+        {
+            string query = "Delete from \"Aposento\" " + "where \"Correo\" = '" + correo + "'";
+            NpgsqlCommand conector = new NpgsqlCommand(query, conn);
+            conn.Close();
+            conn.Open();
+            conector.ExecuteNonQuery();
+            conn.Close();
+            return;
+        }
         //---------------------------------------------------------------Pedidos-------------------------------------------------------------------
 
         public static void Agregar_Pedido(int pedido, DateTime  Fecha, string dispositivo,string marca,int serie, int monto,string usuario)
@@ -305,6 +323,17 @@ namespace Proyecto1.DataRequest
             datos.Fill(tabla);
             return tabla;
         }
+        public static void Borrar_Pedidos(string correo)
+        {
+            string query = "Delete from \"Pedidos\" " + "where \"Usuario\" = '" + correo + "'";
+            NpgsqlCommand conector = new NpgsqlCommand(query, conn);
+            conn.Close();
+            conn.Open();
+            conector.ExecuteNonQuery();
+            conn.Close();
+            return;
+        }
+
         //--------------------------------------------------------Distribuidores------------------------------------------------------------------------
 
         public static void Agregar_Distribuidor(int Cjuridica, string Nombre, string Continente, string pais)
