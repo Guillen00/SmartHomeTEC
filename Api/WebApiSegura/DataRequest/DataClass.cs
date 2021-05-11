@@ -114,10 +114,23 @@ namespace Proyecto1.DataRequest
     }
     public class Valor_PDF
     {
-        public int Valor { get; set; }
+        public int serie { get; set; }
         public string Correo { get; set; }
+        public DateTime fecha_compra { get; set; }
+        public string dispositivo { get; set; }
+        public int Precio { get; set; }
+        public string Marca { get; set; }
+    }
 
-        public DateTime mes { get; set; }
+    public class Tienda
+    {
+        public List<Dispositivo> America { get; set; }
+        public List<Dispositivo> Europa { get; set; }
+        public List<Dispositivo> Asia { get; set; }
+        public List<Dispositivo> Africa { get; set; }
+        public List<Dispositivo> Oceania { get; set; }
+
+
     }
 
 }

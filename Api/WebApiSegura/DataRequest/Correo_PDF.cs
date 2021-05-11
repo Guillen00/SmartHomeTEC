@@ -24,7 +24,8 @@ namespace Proyecto1.DataRequest
                 objetoCorreo.To = correoDestino;
                 objetoCorreo.Subject = asunto;
                 objetoCorreo.TextBody = mensajeCorreo;
-                objetoCorreo.AddAttachment(@"C:\Users\leona\Desktop\Prueba.pdf");
+                objetoCorreo.AddAttachment(@"C:\Users\leona\Desktop\Factura.pdf");
+                objetoCorreo.AddAttachment(@"C:\Users\leona\Desktop\Garantia.pdf");
                 SmtpServer objetoServidor = new SmtpServer("smtp.gmail.com");
 
                 objetoServidor.User = "smarthometec2021@gmail.com";
@@ -103,5 +104,6 @@ namespace Proyecto1.DataRequest
             writer.Close();
             fs.Close();
         }
+        
     }
 }
