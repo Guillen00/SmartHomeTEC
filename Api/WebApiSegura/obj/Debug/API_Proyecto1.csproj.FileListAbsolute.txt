@@ -148,3 +148,6 @@ C:\Users\leona\Source\Repos\SmartHomeTEC\Api\WebApiSegura\bin\System.ValueTuple.
 C:\Users\leona\Source\Repos\SmartHomeTEC\Api\WebApiSegura\obj\Debug\Poyecto1.dll
 C:\Users\leona\Source\Repos\SmartHomeTEC\Api\WebApiSegura\obj\Debug\Poyecto1.pdb
 C:\Users\leona\Source\Repos\SmartHomeTEC\Api\WebApiSegura\bin\EASendMail.dll
+C:\Users\leona\Source\Repos\SmartHomeTEC\Api\WebApiSegura\bin\BouncyCastle.Crypto.dll
+C:\Users\leona\Source\Repos\SmartHomeTEC\Api\WebApiSegura\bin\itextsharp.dll
+C:\Users\leona\Source\Repos\SmartHomeTEC\Api\WebApiSegura\bin\itextsharp.xml

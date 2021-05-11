@@ -122,13 +122,59 @@ namespace Proyecto1.Controllers
             return Ok(resultado);
         }
         //----------------------------------------------------------Correo----------------------------------------
-        [HttpGet]
+        [HttpPost]
         [Route("EnviarCorreo")]
-        public IHttpActionResult Enviar_CorreoPDF()
-        {
-            
-            
-            return Ok(Proyecto1.DataRequest.Correo_PDF.EnviarCorreo("la","le","li"));
+        public IHttpActionResult Enviar_CorreoPDF(Valor_PDF pdf)
+        {   //Consumo
+            if (pdf.Valor == 1) {
+                DateTime primerDia = new DateTime(pdf.mes.Year, pdf.mes.Month, 1);
+                DateTime ultimoDia = primerDia.AddMonths(1).AddDays(-1);
+                DataTable tbuser = Proyecto1.DataRequest.BDConection.Reporte_Consumo(pdf.Correo, primerDia, ultimoDia);
+                Proyecto1.DataRequest.Correo_PDF.Crear_PDF(tbuser, @"C:\Users\leona\Desktop\Prueba.pdf", "Reporte de Consumo");
+                Proyecto1.DataRequest.Correo_PDF.EnviarCorreo(pdf.Correo, "SmartHome", "Reporte de Consumo");
+                return Ok("Reporte de Consumo enviado");
+            }
+            else if (pdf.Valor == 2) {
+                DataTable tbuser = Proyecto1.DataRequest.BDConection.Reporte_Dispositivo();
+                Proyecto1.DataRequest.Correo_PDF.Crear_PDF(tbuser, @"C:\Users\leona\Desktop\Prueba.pdf", "Reporte de Dispositivos mas usados");
+                Proyecto1.DataRequest.Correo_PDF.EnviarCorreo(pdf.Correo, "SmartHome", "Reporte de Dispositivos mas usados");
+                return Ok("Reporte de Dispositivos mas usados enviado");
+            }
+            else if (pdf.Valor == 3)
+            {
+                DataTable tbuser = Proyecto1.DataRequest.BDConection.Reporte_Periodo_del_dia();
+                int x = 0, dia = 0, tarde = 0, noche = 0;
+                while (x < tbuser.Rows.Count)
+                {
+                    DateTime temp = (DateTime)tbuser.Rows[x]["Fecha"];
+                    if (6 <= temp.Hour & temp.Hour <= 12) { dia++; }
+                    else if (13 <= temp.Hour & temp.Hour <= 18) { tarde++; }
+                    else if (19 <= temp.Hour & temp.Hour <= 24) { noche++; }
+                    else if (0 <= temp.Hour & temp.Hour <= 5) { noche++; }
+                    x++;
+                }
+                int[] resultado = { dia, tarde, noche };
+                DataTable nueva = new DataTable();
+                nueva.Columns.Add("Dia");
+                nueva.Columns.Add("Tarde");
+                nueva.Columns.Add("Noche");
+                nueva.Rows.Add(dia,tarde,noche);
+                Proyecto1.DataRequest.Correo_PDF.Crear_PDF(nueva, @"C:\Users\leona\Desktop\Prueba.pdf", "Reporte de uso por periodo de dia");
+                Proyecto1.DataRequest.Correo_PDF.EnviarCorreo(pdf.Correo, "SmartHome", "Reporte de uso por periodo de dia");
+                return Ok("Reporte de uso por periodo de dia enviado");
+            }
+
+            return Ok("En este momento no se pudo enviar el correo, por favor intentelo de nuevo");
         }
+        [HttpGet]
+        [Route("PDF")]
+        public IHttpActionResult PDF()
+        {
+            DataTable tbuser = Proyecto1.DataRequest.BDConection.Reporte_Dispositivo();
+            //Proyecto1.DataRequest.Correo_PDF.EnviarCorreo("leonardoguillen946@gmail.com", "le", "li");
+            Proyecto1.DataRequest.Correo_PDF.Crear_PDF(tbuser, @"C:\Users\leona\Desktop\Prueba.pdf", "Primer Reporte");
+            return Ok("Listo");
+        }
+
     }
 }

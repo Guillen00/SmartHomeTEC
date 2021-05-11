@@ -112,4 +112,12 @@ namespace Proyecto1.DataRequest
         public List<Dispositivo> Hoja1 { get; set; }
 
     }
+    public class Valor_PDF
+    {
+        public int Valor { get; set; }
+        public string Correo { get; set; }
+
+        public DateTime mes { get; set; }
     }
+
+}
