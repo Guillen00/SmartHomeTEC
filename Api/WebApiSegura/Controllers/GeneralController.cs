@@ -153,6 +153,19 @@ namespace Proyecto1.Controllers
 
             return Ok(tbuser);
         }
+        [HttpPost]
+        [Route("DispositivoAdmin")]
+        public IHttpActionResult Consulta_Dispositivos_Admin(Dispositivo disp)
+        {
+            DataTable tbuser = Proyecto1.DataRequest.BDConection.Consultar_DispositivoSerie(disp.Serie);
+            if (tbuser.Rows.Count == 0)
+            {
+                return Ok("No se ha encontrado ese dispositivo o no esta disponible");
+            }
+
+
+            return Ok(tbuser);
+        }
 
         //----------------------------------------------Historial-------------------------------
         //Agrega historial a base de datos
