@@ -167,6 +167,22 @@ namespace Proyecto1.Controllers
             return Ok(tbuser);
         }
 
+        [HttpPost]
+        [Route("Desactivar")]
+        public IHttpActionResult Desactivar_Dispositivo(Dispositivo disp)
+        {
+            DataTable tbuser2 = Proyecto1.DataRequest.BDConection.Consultar_DispositivoSerie(disp.Serie);
+            disp.Serie = (int)tbuser2.Rows[0]["Serie"];
+            
+
+
+            Proyecto1.DataRequest.BDConection.Editar_Dispositivo(disp.Serie, tbuser2.Rows[0]["Marca"].ToString(), (int)tbuser2.Rows[0]["Consumo_Electrico"], " ", tbuser2.Rows[0]["Nombre"].ToString(), tbuser2.Rows[0]["Descripcion"].ToString(), (int)tbuser2.Rows[0]["Tiempo_Garantia"], false, tbuser2.Rows[0]["Historial_Duenos"].ToString() + ","+ tbuser2.Rows[0]["Dueno"].ToString(), tbuser2.Rows[0]["Distribuidor"].ToString(), tbuser2.Rows[0]["AgregadoPor"].ToString(), " ");
+            return Ok("El dispositivo ha sido desactivado ");
+
+            
+        }
+
+
         //----------------------------------------------Historial-------------------------------
         //Agrega historial a base de datos
         [HttpPost]
