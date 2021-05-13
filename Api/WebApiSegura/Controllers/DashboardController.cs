@@ -76,6 +76,7 @@ namespace Proyecto1.Controllers
                 disp.Historial_Duenos = tbuser5.Rows[i]["Historial_Duenos"].ToString();
                 disp.Marca = tbuser5.Rows[i]["Marca"].ToString();
                 disp.Tiempo_Garantia = (int)tbuser5.Rows[i]["Tiempo_Garantia"];
+                disp.Precio = (int)tbuser2.Rows[i]["Precio"]; 
                 //lista[i] = disp;
                 lista.Add(disp);
                 i++;
@@ -116,7 +117,7 @@ namespace Proyecto1.Controllers
                 else if (13 <= temp.Hour & temp.Hour <= 18) { tarde++; }
                 else if (19 <= temp.Hour & temp.Hour <= 24) { noche++; }
                 else if (0 <= temp.Hour & temp.Hour <= 5) { noche++; }
-                x++;
+                   x++;
             }
             int[] resultado = { dia, tarde, noche };
             return Ok(resultado);
@@ -212,6 +213,7 @@ namespace Proyecto1.Controllers
                     nuevo.Decripcion = tbuser.Rows[x]["Descripcion"].ToString();
                     nuevo.Consumo_Electrico = (int)tbuser.Rows[x]["Consumo_Electrico"];
                     nuevo.AgregadoPor = tbuser.Rows[x]["AgregadoPor"].ToString();
+                    nuevo.Precio = (int)tbuser.Rows[x]["Precio"]; 
                     tienda.America.Add(nuevo);
                 }
                 if (tbuser.Rows[x]["Continente"].ToString() == "Europa") {
@@ -224,6 +226,7 @@ namespace Proyecto1.Controllers
                     nuevo.Decripcion = tbuser.Rows[x]["Descripcion"].ToString();
                     nuevo.Consumo_Electrico = (int)tbuser.Rows[x]["Consumo_Electrico"];
                     nuevo.AgregadoPor = tbuser.Rows[x]["AgregadoPor"].ToString();
+                    nuevo.Precio = (int)tbuser.Rows[x]["Precio"];
                     tienda.Europa.Add(nuevo);
                 }
                 if (tbuser.Rows[x]["Continente"].ToString() == "Asia") {
@@ -236,6 +239,7 @@ namespace Proyecto1.Controllers
                     nuevo.Decripcion = tbuser.Rows[x]["Descripcion"].ToString();
                     nuevo.Consumo_Electrico = (int)tbuser.Rows[x]["Consumo_Electrico"];
                     nuevo.AgregadoPor = tbuser.Rows[x]["AgregadoPor"].ToString();
+                    nuevo.Precio = (int)tbuser.Rows[x]["Precio"];
                     tienda.Asia.Add(nuevo);
                 }
                 if (tbuser.Rows[x]["Continente"].ToString() == "Africa") {
@@ -248,6 +252,7 @@ namespace Proyecto1.Controllers
                     nuevo.Decripcion = tbuser.Rows[x]["Descripcion"].ToString();
                     nuevo.Consumo_Electrico = (int)tbuser.Rows[x]["Consumo_Electrico"];
                     nuevo.AgregadoPor = tbuser.Rows[x]["AgregadoPor"].ToString();
+                    nuevo.Precio = (int)tbuser.Rows[x]["Precio"];
                     tienda.Africa.Add(nuevo);
                 }
                 if (tbuser.Rows[x]["Continente"].ToString() == "Oceania") {
@@ -260,6 +265,7 @@ namespace Proyecto1.Controllers
                     nuevo.Decripcion = tbuser.Rows[x]["Descripcion"].ToString();
                     nuevo.Consumo_Electrico = (int)tbuser.Rows[x]["Consumo_Electrico"];
                     nuevo.AgregadoPor = tbuser.Rows[x]["AgregadoPor"].ToString();
+                    nuevo.Precio = (int)tbuser.Rows[x]["Precio"];
                     tienda.Oceania.Add(nuevo);
                 }
                 x++;

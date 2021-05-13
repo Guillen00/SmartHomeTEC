@@ -30,13 +30,10 @@ namespace Proyecto1.Controllers
                 {
                     return Ok("El numero de serie del dispositivo ya ha sido ingresado");
                 }
-                else if (disp.Nombre == tbuser.Rows[x]["Nombre"].ToString())
-                {
-                    return Ok("El Nombre del dispositivo ya ha sido ingresado");
-                }
+                
                 x++;
             }
-            Proyecto1.DataRequest.BDConection.Agregar_Dispositivo(disp.Serie,disp.Marca,disp.Consumo_Electrico,disp.Aposento,disp.Nombre,disp.Decripcion,disp.Tiempo_Garantia,disp.Activo,disp.Historial_Duenos,disp.Distribuidor,disp.AgregadoPor,disp.Dueno);
+            Proyecto1.DataRequest.BDConection.Agregar_Dispositivo(disp.Serie,disp.Marca,disp.Consumo_Electrico,disp.Aposento,disp.Nombre,disp.Decripcion,disp.Tiempo_Garantia,disp.Activo,disp.Historial_Duenos,disp.Distribuidor,disp.AgregadoPor,disp.Dueno,disp.Precio);
             return Ok("El dispositivo se ha agregado exitosamente");
         }
 
@@ -65,9 +62,9 @@ namespace Proyecto1.Controllers
                     if (disp.Dueno == null) { disp.Dueno = tbuser2.Rows[0]["Dueno"].ToString(); }
                     if (disp.Marca == null) { disp.Marca = tbuser2.Rows[0]["Marca"].ToString(); }
                     if (disp.Tiempo_Garantia == 0) { disp.Tiempo_Garantia = (int)tbuser2.Rows[0]["Tiempo_Garantia"]; }
+                    if (disp.Precio == 0) { disp.Precio = (int)tbuser2.Rows[0]["Precio"]; }
 
-
-                    Proyecto1.DataRequest.BDConection.Editar_Dispositivo(disp.Serie, disp.Marca, disp.Consumo_Electrico, disp.Aposento, disp.Nombre, disp.Decripcion, disp.Tiempo_Garantia, disp.Activo, disp.Historial_Duenos,disp.Distribuidor,disp.AgregadoPor,disp.Dueno);
+                    Proyecto1.DataRequest.BDConection.Editar_Dispositivo(disp.Serie, disp.Marca, disp.Consumo_Electrico, disp.Aposento, disp.Nombre, disp.Decripcion, disp.Tiempo_Garantia, disp.Activo, disp.Historial_Duenos,disp.Distribuidor,disp.AgregadoPor,disp.Dueno,disp.Precio);
                     return Ok("El dispositivo ha sido actualizado ");
                 }
                 x++;
@@ -100,9 +97,9 @@ namespace Proyecto1.Controllers
                     if (disp.Dueno == null) { disp.Dueno = tbuser2.Rows[0]["Dueno"].ToString(); }
                     if (disp.Marca == null) { disp.Marca = tbuser2.Rows[0]["Marca"].ToString(); }
                     if (disp.Tiempo_Garantia == 0) { disp.Tiempo_Garantia = (int)tbuser2.Rows[0]["Tiempo_Garantia"]; }
+                    if (disp.Precio == 0) { disp.Precio = (int)tbuser2.Rows[0]["Precio"]; }
 
-
-                    Proyecto1.DataRequest.BDConection.Editar_Dispositivo(disp.Serie, disp.Marca, disp.Consumo_Electrico, disp.Aposento, disp.Nombre, disp.Decripcion, disp.Tiempo_Garantia, disp.Activo, disp.Historial_Duenos, disp.Distribuidor, disp.AgregadoPor, disp.Dueno);
+                    Proyecto1.DataRequest.BDConection.Editar_Dispositivo(disp.Serie, disp.Marca, disp.Consumo_Electrico, disp.Aposento, disp.Nombre, disp.Decripcion, disp.Tiempo_Garantia, disp.Activo, disp.Historial_Duenos, disp.Distribuidor, disp.AgregadoPor, disp.Dueno,disp.Precio);
                     return Ok("El dispositivo ha sido actualizado ");
                 }
                 x++;
@@ -176,7 +173,7 @@ namespace Proyecto1.Controllers
             
 
 
-            Proyecto1.DataRequest.BDConection.Editar_Dispositivo(disp.Serie, tbuser2.Rows[0]["Marca"].ToString(), (int)tbuser2.Rows[0]["Consumo_Electrico"], " ", tbuser2.Rows[0]["Nombre"].ToString(), tbuser2.Rows[0]["Descripcion"].ToString(), (int)tbuser2.Rows[0]["Tiempo_Garantia"], false, tbuser2.Rows[0]["Historial_Duenos"].ToString() + ","+ tbuser2.Rows[0]["Dueno"].ToString(), tbuser2.Rows[0]["Distribuidor"].ToString(), tbuser2.Rows[0]["AgregadoPor"].ToString(), " ");
+            Proyecto1.DataRequest.BDConection.Editar_Dispositivo(disp.Serie, tbuser2.Rows[0]["Marca"].ToString(), (int)tbuser2.Rows[0]["Consumo_Electrico"], " ", tbuser2.Rows[0]["Nombre"].ToString(), tbuser2.Rows[0]["Descripcion"].ToString(), (int)tbuser2.Rows[0]["Tiempo_Garantia"], false, tbuser2.Rows[0]["Historial_Duenos"].ToString() + ","+ tbuser2.Rows[0]["Dueno"].ToString(), tbuser2.Rows[0]["Distribuidor"].ToString(), tbuser2.Rows[0]["AgregadoPor"].ToString(), " ", (int)tbuser2.Rows[0]["Precio"] );
             return Ok("El dispositivo ha sido desactivado ");
 
             

@@ -104,7 +104,7 @@ namespace Proyecto1.Controllers
             int x = 0;
             while (x < tbuser.Rows.Count)
             {
-                Proyecto1.DataRequest.BDConection.Editar_Dispositivo((int)tbuser.Rows[x]["Serie"], tbuser.Rows[x]["Marca"].ToString(), (int)tbuser.Rows[x]["Consumo_Electrico"], tbuser.Rows[x]["Aposento"].ToString(), tbuser.Rows[x]["Nombre"].ToString(), tbuser.Rows[x]["Descripcion"].ToString(),  (int)tbuser.Rows[x]["Tiempo_Garantia"], false, tbuser.Rows[x]["Historial_Duenos"].ToString()+","+ tbuser.Rows[x]["Dueno"].ToString(), tbuser.Rows[x]["Distribuidor"].ToString(), tbuser.Rows[x]["AgregadoPor"].ToString(), " ");
+                Proyecto1.DataRequest.BDConection.Editar_Dispositivo((int)tbuser.Rows[x]["Serie"], tbuser.Rows[x]["Marca"].ToString(), (int)tbuser.Rows[x]["Consumo_Electrico"], tbuser.Rows[x]["Aposento"].ToString(), tbuser.Rows[x]["Nombre"].ToString(), tbuser.Rows[x]["Descripcion"].ToString(),  (int)tbuser.Rows[x]["Tiempo_Garantia"], false, tbuser.Rows[x]["Historial_Duenos"].ToString()+","+ tbuser.Rows[x]["Dueno"].ToString(), tbuser.Rows[x]["Distribuidor"].ToString(), tbuser.Rows[x]["AgregadoPor"].ToString(), " ", (int)tbuser.Rows[x]["Precio"]);
                 x++;
             }
 

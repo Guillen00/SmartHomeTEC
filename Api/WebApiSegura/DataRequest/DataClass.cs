@@ -19,6 +19,7 @@ namespace Proyecto1.DataRequest
         public string Distribuidor { get; set; }
         public string AgregadoPor { get; set; }
         public string Dueno { get; set; }
+        public int Precio { get; set; }
     }
 
     public class Historial

@@ -131,10 +131,10 @@ namespace Proyecto1.DataRequest
             datos.Fill(tabla);
             return tabla;
         }
-        public static void Agregar_Dispositivo(int serie, string marca, int consumo, string aposento, string nombre, string descripcion, int  t_garantia, Boolean activo, string  historialDuenos ,string distr,string Agregado,string Dueno)
+        public static void Agregar_Dispositivo(int serie, string marca, int consumo, string aposento, string nombre, string descripcion, int  t_garantia, Boolean activo, string  historialDuenos ,string distr,string Agregado,string Dueno,int precio)
         {
 
-            string query = "Insert into \"Dispositivo\" values(" + serie + ",'" + marca + "'," + consumo + ",'" + aposento + "','" + nombre + "','" + descripcion + "'," + t_garantia + "," + activo + ", ' " + historialDuenos + "','" + distr + "','" + Agregado + "','"+ Dueno + "')";
+            string query = "Insert into \"Dispositivo\" values(" + serie + ",'" + marca + "'," + consumo + ",'" + aposento + "','" + nombre + "','" + descripcion + "'," + t_garantia + "," + activo + ", ' " + historialDuenos + "','" + distr + "','" + Agregado + "','"+ Dueno + "',"+precio+")";
             conn.Close();
             conn.Open();
             NpgsqlCommand conector = new NpgsqlCommand(query, conn);
@@ -142,9 +142,9 @@ namespace Proyecto1.DataRequest
             return;
         }
 
-        public static void Editar_Dispositivo(int serie, string marca, int consumo, string aposento, string nombre, string descripcion, int t_garantia, Boolean activo, string historialDuenos,string distr,string Agregado,string Dueno)
+        public static void Editar_Dispositivo(int serie, string marca, int consumo, string aposento, string nombre, string descripcion, int t_garantia, Boolean activo, string historialDuenos,string distr,string Agregado,string Dueno,int precio)
         {
-            string query = "Update \"Dispositivo\" set \"Serie\" =" + serie + ",\"Marca\" = '" + marca + "',\"Consumo_Electrico\" = " + consumo + ", \"Aposento\" = '" + aposento + "',\"Nombre\" = '" + nombre + "',\"Descripcion\" = '" + descripcion + "',\"Tiempo_Garantia\" = " + t_garantia + ", \"Activo\"= "+activo+ ",\"Historial_Duenos\"= '" + historialDuenos+"',\"Distribuidor\"='"+distr + "',\"AgregadoPor\"='" + Agregado + "',\"Dueno\"='" + Dueno + "' " + "where \"Serie\" = " + serie + "";
+            string query = "Update \"Dispositivo\" set \"Serie\" =" + serie + ",\"Marca\" = '" + marca + "',\"Consumo_Electrico\" = " + consumo + ", \"Aposento\" = '" + aposento + "',\"Nombre\" = '" + nombre + "',\"Descripcion\" = '" + descripcion + "',\"Tiempo_Garantia\" = " + t_garantia + ", \"Activo\"= "+activo+ ",\"Historial_Duenos\"= '" + historialDuenos+"',\"Distribuidor\"='"+distr + "',\"AgregadoPor\"='" + Agregado + "',\"Dueno\"='" + Dueno + "', \"Precio\" = "+precio+"  " + "where \"Serie\" = " + serie + "";
             NpgsqlCommand conector = new NpgsqlCommand(query, conn);
             conn.Close();
             conn.Open();
