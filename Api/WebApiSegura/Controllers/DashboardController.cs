@@ -88,7 +88,7 @@ namespace Proyecto1.Controllers
         [Route("ReporteConsumo")]
         public IHttpActionResult ReporteConsumo(Reporte reporte)
         {
-            DateTime primerDia = new DateTime(reporte.ano, reporte.mes, 1);
+            DateTime primerDia = new DateTime(reporte.mes.Year, reporte.mes.Month, 1);
             DateTime ultimoDia = primerDia.AddMonths(1).AddDays(-1);
             DataTable tbuser = Proyecto1.DataRequest.BDConection.Reporte_Consumo(reporte.Correo,primerDia,ultimoDia);
             
