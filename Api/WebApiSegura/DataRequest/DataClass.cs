@@ -91,8 +91,8 @@ namespace Proyecto1.DataRequest
     public class Reporte
     {
         public string Correo { get; set; }
-        public DateTime mes { get; set; }
-
+        public int mes { get; set; }
+        public int ano { get; set; }
     }
 
     public class Dashboard
