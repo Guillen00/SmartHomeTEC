@@ -7,6 +7,12 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <_PublishTargetUrl>C:\Users\leona\source\repos\SmartHomeTEC\Release</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
+    <File Include="bin/BouncyCastle.Crypto.dll">
+      <publishTime>02/21/2020 16:24:54</publishTime>
+    </File>
+    <File Include="bin/EASendMail.dll">
+      <publishTime>05/09/2021 20:20:57</publishTime>
+    </File>
     <File Include="bin/es/System.Net.Http.Formatting.resources.dll">
       <publishTime>01/28/2015 04:02:48</publishTime>
     </File>
@@ -15,6 +21,9 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     </File>
     <File Include="bin/es/System.Web.Http.WebHost.resources.dll">
       <publishTime>01/28/2015 04:03:50</publishTime>
+    </File>
+    <File Include="bin/itextsharp.dll">
+      <publishTime>08/27/2020 11:20:20</publishTime>
     </File>
     <File Include="bin/Microsoft.Bcl.AsyncInterfaces.dll">
       <publishTime>11/15/2019 08:38:12</publishTime>
@@ -47,10 +56,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>03/25/2021 11:16:30</publishTime>
     </File>
     <File Include="bin/Poyecto1.dll">
-      <publishTime>05/04/2021 00:22:20</publishTime>
+      <publishTime>05/14/2021 14:19:02</publishTime>
     </File>
     <File Include="bin/Poyecto1.pdb">
-      <publishTime>05/04/2021 00:22:20</publishTime>
+      <publishTime>05/14/2021 14:19:02</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe">
       <publishTime>04/13/2017 15:47:48</publishTime>
@@ -524,7 +533,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>03/09/2021 15:26:20</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>05/04/2021 00:22:23</publishTime>
+      <publishTime>05/14/2021 14:17:19</publishTime>
     </File>
   </ItemGroup>
 </Project>

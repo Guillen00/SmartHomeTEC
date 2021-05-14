@@ -147,3 +147,7 @@ C:\Users\leona\Source\Repos\SmartHomeTEC\Api\WebApiSegura\obj\Release\API_Proyec
 C:\Users\leona\Source\Repos\SmartHomeTEC\Api\WebApiSegura\obj\Release\API_Proyecto1.csproj.CopyComplete
 C:\Users\leona\Source\Repos\SmartHomeTEC\Api\WebApiSegura\obj\Release\Poyecto1.dll
 C:\Users\leona\Source\Repos\SmartHomeTEC\Api\WebApiSegura\obj\Release\Poyecto1.pdb
+C:\Users\leona\Source\Repos\SmartHomeTEC\Api\WebApiSegura\bin\BouncyCastle.Crypto.dll
+C:\Users\leona\Source\Repos\SmartHomeTEC\Api\WebApiSegura\bin\EASendMail.dll
+C:\Users\leona\Source\Repos\SmartHomeTEC\Api\WebApiSegura\bin\itextsharp.dll
+C:\Users\leona\Source\Repos\SmartHomeTEC\Api\WebApiSegura\bin\itextsharp.xml
