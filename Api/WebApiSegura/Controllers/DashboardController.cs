@@ -16,10 +16,14 @@ namespace Proyecto1.Controllers
 
     [AllowAnonymous]
     [RoutePrefix("api/Dashboard")]
+        /*
+         * En este archivo se manejaran los datos de promedios, regionales, correo y pdf
+         */
     public class DashboardController : ApiController
     {
         
-        //Devuelve cantidad de dispositvos gestionados
+        //Devuelve cantidad de dispositvos gestionados, el nuemro de dispositvios promedio por usuario,el numero de dispositivos ubicados por continente y una lsita de todos los 
+        //dispositivos en el sistema
         [HttpGet]
         [Route("All")]
         public IHttpActionResult DispositivosGestionados()
@@ -76,15 +80,14 @@ namespace Proyecto1.Controllers
                 disp.Historial_Duenos = tbuser5.Rows[i]["Historial_Duenos"].ToString();
                 disp.Marca = tbuser5.Rows[i]["Marca"].ToString();
                 disp.Tiempo_Garantia = (int)tbuser5.Rows[i]["Tiempo_Garantia"];
-                disp.Precio = (int)tbuser2.Rows[i]["Precio"]; 
-                //lista[i] = disp;
+                disp.Precio = (int)tbuser5.Rows[i]["Precio"]; 
                 lista.Add(disp);
                 i++;
             }
             dash.Disp = lista;
             return Ok(dash);
         }
-
+        //En este reporte se indican todas las veces en las cuales el dispositivo de utilizo durante el mes y año ingresado
         [HttpPost]
         [Route("ReporteConsumo")]
         public IHttpActionResult ReporteConsumo(Reporte reporte)
@@ -95,7 +98,7 @@ namespace Proyecto1.Controllers
             
             return Ok(tbuser);
         }
-
+        //Este reporte maneja los dispositivos mas usados, en una categoria , tipo de dispositivo y numero de dispositivos con ese tipo de dispositivo
         [HttpGet]
         [Route("ReporteDispositivosU")]
         public IHttpActionResult Reporte_Dispositivos_mas_usados()
@@ -104,7 +107,7 @@ namespace Proyecto1.Controllers
 
             return Ok(tbuser);
         }
-
+        //Este reporte de consumo indica en cual periodo del dia de utilizan mas los dispositivos
         [HttpGet]
         [Route("ReportePeriodo")]
         public IHttpActionResult Reporte_Periodo_mas_usado()
@@ -123,6 +126,7 @@ namespace Proyecto1.Controllers
             return Ok(resultado);
         }
         //----------------------------------------------------------Correo----------------------------------------
+        //En esta funcion se envia un correo desde la empresa a un correo del cliente, conteniendo una factura y el certificado de garantia contenidos en pdf distintos
         [HttpPost]
         [Route("EnviarCorreo")]
         public IHttpActionResult Enviar_CorreoPDF(Valor_PDF pdf)
@@ -180,6 +184,7 @@ namespace Proyecto1.Controllers
         }
         [HttpGet]
         [Route("PDF")]
+        //Esta funcion crea un pdf de prueba
         public IHttpActionResult PDF()
         {
             DataTable tbuser = Proyecto1.DataRequest.BDConection.Reporte_Dispositivo();
@@ -190,6 +195,7 @@ namespace Proyecto1.Controllers
         //-----------------------------------------------------------------------------Tienda en linea-------------------------------------------
         [HttpGet]
         [Route("TiendaLinea")]
+        //En este campo de relaciona con la tienda en linea , creando varias listas de dispositivos , dividida por contienentes o region
         public IHttpActionResult Tienda_Linea()
         {
             DataTable tbuser = Proyecto1.DataRequest.BDConection.Consultar_DispositivoXRegion();

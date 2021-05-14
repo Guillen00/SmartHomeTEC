@@ -10,8 +10,15 @@ using System.IO;
 
 namespace Proyecto1.DataRequest
 {
+    /*
+     * La clase Correo_PDF tiene la funcionalidad de crear un correo electronico, y tambien crea dos pdf
+     */
     public class Correo_PDF
     {
+        /*
+         * La funcion  EnviarCorreo recibe tres string , el primero es el correo al cual se le enviara el correo , el segundo, tiene el asunto dle correo y el trecero contiene un mensaje
+         * que llevara el correo
+         */
         public static string EnviarCorreo(string correoDestino, string asunto, string mensajeCorreo)
         {
             string mensaje = "Error al enviar correo.";
@@ -45,7 +52,10 @@ namespace Proyecto1.DataRequest
             }
             return mensaje;
         }
-
+        /*
+         * La funcion Crear_PDF recibe una datatable que lleva la informacion que llevara el pdf con todo y sus columnas y dos string uno contiene la direccion local en donde
+         * se guardara y el segundo lleva un titulo para el pdf y su tabla.
+         */
         public static void Crear_PDF(DataTable dtblTable, string strPdfPath, string strHeader) {
             FileStream fs = new FileStream(strPdfPath, FileMode.Create, FileAccess.Write, FileShare.None);
             Document document = new Document();

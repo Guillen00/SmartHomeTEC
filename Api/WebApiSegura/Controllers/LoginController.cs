@@ -13,6 +13,9 @@ namespace Proyecto1.Controllers
     /// </summary>
     [AllowAnonymous]
     [RoutePrefix("api/login")]
+        /*
+         * Este archivo tendra el contro de todo lo relacionado con el login,peticiones de GET y POST necesarios para emplear la funcionalidad del login 
+         */
     public class LoginController : ApiController
     {
         //Verifica si el usuario ingresado, correo y Contraseña coinciden con alguno guardado en la base de datos 
@@ -84,7 +87,7 @@ namespace Proyecto1.Controllers
             
             return Ok("El usuario no se ha agregado");
         }
-        // Hace una consulta sobre todos los usuarios 
+        // Hace una consulta sobre todos los usuarios y lo retorna en una datatable
         [HttpGet]
         [Route("ListaUsuarios")]
         public IHttpActionResult Lista_Usuarios()
@@ -94,7 +97,8 @@ namespace Proyecto1.Controllers
 
             return Ok(tbuser);
         }
-        //Elimina un usuario por medio de su llave , correo
+        //Elimina un usuario por medio de su llave , correo ademas edita los dispositivos y los pone en false para poder ser utilizados por otros usuarios 
+        //ademas elimina los aposentos, pedidos y final mente el usuario que estaban relacionados con el correo
         [HttpPost]
         [Route("BorrarUsuario")]
         public IHttpActionResult Borrar_Usuario(Usuario user)
@@ -115,7 +119,7 @@ namespace Proyecto1.Controllers
 
             return Ok("El usuario ha sido eliminado exitosamente");
         }
-        //Pide informacion sobre un usuario
+        //Pide informacion sobre un usuario en especifico
         [HttpPost]
         [Route("PerfilUsuario")]
         public IHttpActionResult Perfil_Usuario(Usuario user)

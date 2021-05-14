@@ -9,6 +9,9 @@ using Proyecto1;
 [assembly: PreApplicationStartMethod(typeof(SwaggerConfig), "Register")]
 namespace Proyecto1
 {
+    /*
+     * La clase SwaggerConfig , agrega configuracion al API
+     */
     public class SwaggerConfig
     {
         public static void Register()

@@ -17,7 +17,7 @@ namespace Proyecto1.Controllers
     public class GeneralController : ApiController
     {
         //-------------------------------------------------Dispositivo-----------------------------------------
-        // Agrega un nuevo dispositivo a la base de datos
+        // Agrega un nuevo dispositivo a la base de datos revisando que no se repita el numero de serie 
         [HttpPost]
         [Route("AgregarDispositivo")]
         public IHttpActionResult Agregar(Dispositivo disp)
@@ -37,7 +37,7 @@ namespace Proyecto1.Controllers
             return Ok("El dispositivo se ha agregado exitosamente");
         }
 
-        //Edita el perfil, del dispositivo con el numeor de serie como llave
+        //Edita el perfil, del dispositivo con el numero de serie como llave editando los dispositivos que no estan activos 
         [HttpPost]
         [Route("EditarDispositivo")]
         public IHttpActionResult Editar_Dispositivo(Dispositivo disp)
@@ -72,7 +72,7 @@ namespace Proyecto1.Controllers
             
             return Ok("El Dispositivo no se ha entontrado o esta activo");
         }
-        //Edita el perfil, del dispositivo con el numeor de serie como llave
+        //Edita el perfil, del dispositivo con el numero de serie como llave, editando cualquier dispositivo 
         [HttpPost]
         [Route("EditarDispositivoAdmin")]
         public IHttpActionResult Editar_Dispositivo_admin(Dispositivo disp)
@@ -138,6 +138,7 @@ namespace Proyecto1.Controllers
 
             return Ok(tbuser);
         }
+        //Consulta un dispositivo inactivo por el numero de serie 
         [HttpPost]
         [Route("DispositivoInactivo")]
         public IHttpActionResult Consulta_Dispositivos_Inactivo(Dispositivo disp)
@@ -150,6 +151,7 @@ namespace Proyecto1.Controllers
 
             return Ok(tbuser);
         }
+        //Busca cualqueir dispositivo en la base por su numero de serie
         [HttpPost]
         [Route("DispositivoAdmin")]
         public IHttpActionResult Consulta_Dispositivos_Admin(Dispositivo disp)
@@ -163,7 +165,7 @@ namespace Proyecto1.Controllers
 
             return Ok(tbuser);
         }
-
+        //Desactiva cualquier dispositivo buscado por el numero de serie y se encarga de pasar el activo a false, quita el dueño y lo agrega a la lista de historial de dueños
         [HttpPost]
         [Route("Desactivar")]
         public IHttpActionResult Desactivar_Dispositivo(Dispositivo disp)
@@ -192,7 +194,7 @@ namespace Proyecto1.Controllers
         }
 
 
-        // Hace una consulta sobre todos los historiales  
+        // Hace una consulta sobre todos los historiales  buscando por numero de serie
         [HttpPost]
         [Route("ListaHistorial")]
         public IHttpActionResult Lista_Historial(Historial hist)
@@ -205,7 +207,7 @@ namespace Proyecto1.Controllers
 
 
         //------------------------------------------------------------------------------Distribuidores----------------------------------
-        //Agrega distribuidor a base de datos
+        //Agrega distribuidor a base de datos buscando que no se repita ni el numero de cedula juridica ni el nombre
         [HttpPost]
         [Route("AgregarDistribuidor")]
         public IHttpActionResult Agregar_Distribuidor(Distribuidores dist)
@@ -228,7 +230,7 @@ namespace Proyecto1.Controllers
         }
 
 
-        // Hace una consulta sobre un distribuidor  
+        // Hace una consulta sobre un distribuidor buscandolo por numero de cedula juridica
         [HttpPost]
         [Route("Distribuidor")]
         public IHttpActionResult Distribuidor(Distribuidores dist)
@@ -241,7 +243,7 @@ namespace Proyecto1.Controllers
 
         //--------------------------------------------------------------Pedido----------------------------------------------------------------------------------
 
-        //Agrega pedido a base de datos
+        //Agrega pedido a base de datos buscando el ultimo pedido de cada cliente para aumentarlo y asi tener una cuenta de pedidos individual para cada usuario
         [HttpPost]
         [Route("AgregarPedido")]
         public IHttpActionResult Agregar_Pedido(Pedidos pedido)
@@ -262,7 +264,7 @@ namespace Proyecto1.Controllers
         }
 
 
-        // Hace una consulta sobre un pedido  
+        // Hace una consulta sobre un pedido relacionado a un numero de serie  
         [HttpPost]
         [Route("ConsultaPedido")]
         public IHttpActionResult Consulta_Pedido(Pedidos pedido)
@@ -275,7 +277,7 @@ namespace Proyecto1.Controllers
 
         //-------------------------------------------------------------------------------Aposento-----------------------------------------------------------------------
 
-        //Agrega Aposento a base de datos
+        //Agrega Aposento a base de datos buscando y verificando que este no se repita para el mismo usuario
         [HttpPost]
         [Route("AgregarAposento")]
         public IHttpActionResult Agregar_Aposento(Aposentos apo)
@@ -308,7 +310,7 @@ namespace Proyecto1.Controllers
 
 
         //-----------------------------------------------------------------------Factura-----------------------------------------------
-        //Agrega factura a base de datos
+        //Agrega factura a base de datos buscando que no se repita nu el numeor de factura, ni el numero de serie del dispositivo que se factura
         [HttpPost]
         [Route("AgregarFactura")]
         public IHttpActionResult Agregar_Fatura(Factura fact)
@@ -332,7 +334,7 @@ namespace Proyecto1.Controllers
         }
 
 
-        // Hace una consulta sobre una factura 
+        // Hace una consulta sobre una factura buscandola por numero de serie 
         [HttpPost]
         [Route("ConsultaFactura")]
         public IHttpActionResult Consulta_Factura(Factura fact)
@@ -345,7 +347,7 @@ namespace Proyecto1.Controllers
 
 
         //-----------------------------------------------------------------------Certificado-----------------------------------------------
-        //Agrega un certificado a base de datos
+        //Agrega un certificado a base de datos verificando que no se repita el numero de serie del dispositivo que tiene la garantia
         [HttpPost]
         [Route("AgregarGarantia")]
         public IHttpActionResult Agregar_Certificado(Certificado_Garantia gara)
@@ -366,7 +368,7 @@ namespace Proyecto1.Controllers
         }
 
 
-        // Hace una consulta sobre un certificado 
+        // Hace una consulta sobre un certificado buscandolo por numeor de serie
         [HttpPost]
         [Route("ConsultaGarantia")]
         public IHttpActionResult Consulta_Certificado(Certificado_Garantia gara)
@@ -378,6 +380,9 @@ namespace Proyecto1.Controllers
         }
 
         //------------------------------------------------------------Excel--------------------------------------------
+        //Esta ruta recibe un json proveniente de un excel, por lo que se ingresa como la clase Hoja y se parsea cada dispositivo, se crea un query de manera que se inserten todos los 
+        //dispositivos en solo una peticion revisando que no se repita el numero de serie de los dispositivos y si alguno se repite, actualiza los que son unicos y los otros se muestran
+        //en un mensaje cualesno se agregaron por ese error
         [HttpPost]
         [Route("Excel")]
         public IHttpActionResult Excel(Hoja disp2)
